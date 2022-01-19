@@ -25,3 +25,6 @@ yarn-error.log*
 
 # vscode settings 
 .vscode
+
+# Ignore knex files
+knexfile.js
