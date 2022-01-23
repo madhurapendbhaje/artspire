@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const userRoutes = require("./routes/users");
+const { v4: uuidv4 } = require("uuid");
+const knex = require("./knexConfig");
 
 // Read env variables
 require("dotenv").config();
@@ -68,7 +70,19 @@ passport.use(
         profile,
         done
     ) {
-        console.log(profile);
+        // console.log(profile);
+        // // Create new user
+        const newUser = {
+            id: uuidv4(),
+            first_name: profile.given_name,
+            last_name: profile.family_name,
+            email: profile.email,
+            picture: profile.picture,
+        };
+        knex("users")
+            .insert(newUser)
+            .then(() => console.log("New User added"))
+            .catch((err) => console.log(`User creation failed: ${err}`));
         // this profile will get saved in express session
         return done(null, profile);
     })
