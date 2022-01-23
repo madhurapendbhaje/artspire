@@ -26,7 +26,6 @@ const passportConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK_URL,
-    passReqToCallback: true,
 };
 
 app.use(express.json());
@@ -67,11 +66,11 @@ passport.use(
         _accessToken,
         _refreshToken,
         profile,
-        cb
+        done
     ) {
-        // console.log('Github Callback: ', profile);
+        console.log(profile);
         // this profile will get saved in express session
-        return cb(null, profile);
+        return done(null, profile);
     })
 );
 
