@@ -79,12 +79,28 @@ passport.use(
             email: profile.email,
             picture: profile.picture,
         };
+        // Find if user exists
         knex("users")
-            .insert(newUser)
-            .then(() => console.log("New User added"))
-            .catch((err) => console.log(`User creation failed: ${err}`));
-        // this profile will get saved in express session
-        return done(null, profile);
+            .where({ email: newUser.email })
+            .then((user) => {
+                if (user.length === 0) {
+                    knex("users")
+                        .insert(newUser)
+                        .then(() => {
+                            // this profile will get saved in express session
+                            return done(null, profile);
+                        })
+                        .catch((err) =>
+                            console.log(`User creation failed: ${err}`)
+                        );
+                } else {
+                    // User exists, don't create a new record
+                    return done(null, profile);
+                }
+            })
+            .catch((err) => {
+                console.log(`Here ${err}`);
+            });
     })
 );
 
