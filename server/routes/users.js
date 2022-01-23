@@ -12,7 +12,7 @@ router.get("/login", (req, res) => {
     // remember the current path user comes from for login to redirect back to it
     authRedirect = req.query.from;
     // start authenticating
-    passport.authenticate("google")(req, res);
+    passport.authenticate("google", { scope: ["email", "profile"] })(req, res);
 });
 
 // logout path
@@ -22,12 +22,13 @@ router.get("/logout", (req, res) => {
 });
 
 // Google Auth CallBack/Redirect http://localhost:3000/users/auth
-router.get("/auth", (_req, _res) => {
+router.get(
+    "/auth",
     passport.authenticate("google", {
-        successRedirect: "http://localhost:3000",
-        failureRedirect: "/loginFailed",
-    });
-});
+        successRedirect: "http://localhost:3000/users",
+        failureRedirect: "http://localhost:3000/users/loginFailed",
+    })
+);
 
 // endpoint for checking user's auth status
 router.get("/check-auth", (req, res) => {
