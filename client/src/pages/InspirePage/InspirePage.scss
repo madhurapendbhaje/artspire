@@ -1,5 +1,24 @@
+@use "../../styles/mixins" as *;
+
 .photo-gallery {
+    width: 100%;
+    padding: 1rem 0 0 1rem;
+    @include tablet {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__column {
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+        }
+    }
     &__image {
-        margin: 1rem;
+        width: 100%;
+        padding: 0 1rem 1rem 0;
+        @include tablet {
+            flex-grow: 2;
+        }
     }
 }
