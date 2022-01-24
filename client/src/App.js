@@ -7,13 +7,15 @@ import LoginPage from "./components/LoginPage";
 import HomePage from "./components/HomePage";
 import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
+import InspirePage from "./pages/InspirePage";
 
 class App extends Component {
     render() {
         return (
             <Router>
                 <div className="app">
-                    <AuthButton />
+                    <Route path="/inspire" component={InspirePage} />
+                    {/* <AuthButton />
                     <ul>
                         <li>
                             <Link to="/users">Home Page</Link>
@@ -27,7 +29,7 @@ class App extends Component {
                     <Favorites
                         path="/users/favorites"
                         component={UserProfile}
-                    />
+                    /> */}
                 </div>
             </Router>
         );
