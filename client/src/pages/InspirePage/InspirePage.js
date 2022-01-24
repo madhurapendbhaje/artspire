@@ -69,9 +69,7 @@ class InspirePage extends Component {
         }
         // For tablet window size, photo gallery will consist of two columns
         if (this.state.windowSize >= 768 && this.state.windowSize < 1280) {
-            console.log("here");
             const modifiedPhotoArr = this.splitToChunks(this.state.photos, 2);
-            console.log(modifiedPhotoArr);
             return (
                 <div className="photo-gallery">
                     {modifiedPhotoArr.map((photoArr) => {
