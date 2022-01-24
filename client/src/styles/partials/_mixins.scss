@@ -1,0 +1,24 @@
+@use "./variables" as *;
+// Breakout points for screen sizes
+
+/* 
+Breakout point for mobile screen for header component alignments. 
+Will check for screen sizes under tablet breakout-point.
+*/
+@mixin mobile {
+    @media (max-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: $breakpoint-desktop) {
+        @content;
+    }
+}
