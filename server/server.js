@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const userRoutes = require("./routes/users");
 const { v4: uuidv4 } = require("uuid");
 const knex = require("./knexConfig");
+const userRoutes = require("./routes/users");
+const photoRoutes = require("./routes/photos");
 
 // Read env variables
 require("dotenv").config();
@@ -30,6 +31,7 @@ const passportConfig = {
     callbackURL: process.env.GOOGLE_CALLBACK_URL,
 };
 
+// Allows us to post JSON in request.body
 app.use(express.json());
 
 // initialize HTTP Headers middleware
@@ -115,8 +117,20 @@ passport.deserializeUser((user, cb) => {
 });
 // =========================================
 
+// Check if JSON is provided for POST request
+app.use((req, res, next) => {
+    if (
+        req.method === "POST" &&
+        req.headers["content-type"] !== "application/json"
+    ) {
+        return res.status(400).send("Send data in JSON format");
+    }
+    next();
+});
+
 // Routes
 app.use("/users", userRoutes);
+app.use("/photos", photoRoutes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
