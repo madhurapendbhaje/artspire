@@ -8,13 +8,18 @@ import HomePage from "./components/HomePage";
 import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
 import InspirePage from "./pages/InspirePage";
+import ColorsPage from "./pages/ColorsPage";
 
 class App extends Component {
     render() {
         return (
             <Router>
                 <div className="app">
-                    <Route path="/inspire" component={InspirePage} />
+                    <Route
+                        path="/inspire/:photoId/colors"
+                        component={ColorsPage}
+                    />
+                    <Route exact path="/inspire" component={InspirePage} />
                     {/* <AuthButton />
                     <ul>
                         <li>

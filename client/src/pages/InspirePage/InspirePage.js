@@ -1,6 +1,7 @@
 import "./InspirePage.scss";
 
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import heartIcon from "../../assets/icons/heart.svg";
@@ -46,6 +47,55 @@ class InspirePage extends Component {
         }, 100);
     };
 
+    photoGrid(photoArrList) {
+        return (
+            <div className="photo-gallery">
+                {photoArrList.map((photoArr, index) => {
+                    return (
+                        <div
+                            className="photo-gallery__column"
+                            key={`photo array ${index + 1}`}
+                        >
+                            {photoArr.map((photo) => {
+                                return (
+                                    <Link
+                                        to={{
+                                            pathname: `/inspire/${photo.id}/colors`,
+                                            state: { url: photo.urls.regular },
+                                        }}
+                                        key={photo.id}
+                                        className="photo-gallery__image-link"
+                                    >
+                                        <div className="photo-gallery__image-container">
+                                            <img
+                                                src={photo.urls.regular}
+                                                alt={
+                                                    photo.description
+                                                        ? photo.description
+                                                        : photo.alt_description
+                                                }
+                                                className="photo-gallery__image"
+                                            />
+                                            <div className="photo-gallery__image-overlay-container">
+                                                <div className="photo-gallery__image-overlay">
+                                                    <img
+                                                        src={heartIcon}
+                                                        alt="Heart Icon"
+                                                        className="photo-gallery__icon"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+
     componentDidMount() {
         axios
             .get(
@@ -72,66 +122,11 @@ class InspirePage extends Component {
         // For tablet window size, photo gallery will consist of two columns
         if (this.state.windowSize >= 768 && this.state.windowSize < 1280) {
             const modifiedPhotoArr = this.splitToChunks(this.state.photos, 2);
-            return (
-                <div className="photo-gallery">
-                    {modifiedPhotoArr.map((photoArr) => {
-                        return (
-                            <div className="photo-gallery__column">
-                                {photoArr.map((photo) => {
-                                    return (
-                                        <div className="photo-gallery__image-container">
-                                            <img
-                                                src={photo.urls.regular}
-                                                alt={
-                                                    photo.description
-                                                        ? photo.description
-                                                        : photo.alt_description
-                                                }
-                                                className="photo-gallery__image"
-                                            />
-                                            <div className="photo-gallery__image-overlay-container">
-                                                <div className="photo-gallery__image-overlay">
-                                                    <img
-                                                        src={heartIcon}
-                                                        alt="Heart Icon"
-                                                        className="photo-gallery__icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
-            );
+            return this.photoGrid(modifiedPhotoArr);
         } else {
             // For desktop window size, photo gallery will consist of three columns
             const modifiedPhotoArr = this.splitToChunks(this.state.photos, 3);
-            return (
-                <div className="photo-gallery">
-                    {modifiedPhotoArr.map((photoArr) => {
-                        return (
-                            <div className="photo-gallery__column">
-                                {photoArr.map((photo) => {
-                                    return (
-                                        <img
-                                            src={photo.urls.regular}
-                                            alt={
-                                                photo.description
-                                                    ? photo.description
-                                                    : photo.alt_description
-                                            }
-                                            className="photo-gallery__image"
-                                        />
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
-                </div>
-            );
+            return this.photoGrid(modifiedPhotoArr);
         }
     }
 }
