@@ -3,6 +3,8 @@ import "./InspirePage.scss";
 import { Component } from "react";
 import axios from "axios";
 
+import heartIcon from "../../assets/icons/heart.svg";
+
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
 
@@ -87,6 +89,15 @@ class InspirePage extends Component {
                                                 }
                                                 className="photo-gallery__image"
                                             />
+                                            <div className="photo-gallery__image-overlay-container">
+                                                <div className="photo-gallery__image-overlay">
+                                                    <img
+                                                        src={heartIcon}
+                                                        alt="Heart Icon"
+                                                        className="photo-gallery__icon"
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
                                     );
                                 })}
