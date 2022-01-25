@@ -77,15 +77,17 @@ class InspirePage extends Component {
                             <div className="photo-gallery__column">
                                 {photoArr.map((photo) => {
                                     return (
-                                        <img
-                                            src={photo.urls.regular}
-                                            alt={
-                                                photo.description
-                                                    ? photo.description
-                                                    : photo.alt_description
-                                            }
-                                            className="photo-gallery__image"
-                                        />
+                                        <div className="photo-gallery__image-container">
+                                            <img
+                                                src={photo.urls.regular}
+                                                alt={
+                                                    photo.description
+                                                        ? photo.description
+                                                        : photo.alt_description
+                                                }
+                                                className="photo-gallery__image"
+                                            />
+                                        </div>
                                     );
                                 })}
                             </div>

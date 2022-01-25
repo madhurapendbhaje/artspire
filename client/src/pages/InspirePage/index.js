@@ -1,1 +1,1 @@
-export { default } from "./InspirePage";
+export { default } from "./InspirePage.js";

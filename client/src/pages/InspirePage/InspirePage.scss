@@ -1,24 +1,25 @@
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
 
 .photo-gallery {
     width: 100%;
     padding: 1rem 0 0 1rem;
     @include tablet {
         display: flex;
-        justify-content: space-between;
     }
 
     &__column {
+        padding-right: 1rem;
         @include tablet {
             display: flex;
             flex-direction: column;
         }
     }
+    &__image-container {
+        padding-bottom: 1rem;
+    }
     &__image {
         width: 100%;
-        padding: 0 1rem 1rem 0;
-        @include tablet {
-            flex-grow: 2;
-        }
+        border-radius: 0.5rem;
     }
 }
