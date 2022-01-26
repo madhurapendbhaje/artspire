@@ -35,8 +35,35 @@
         display: flex;
 
         &-link {
+            padding: 1rem;
             text-decoration: none;
             color: $primary-text-color;
+            position: relative;
+            transition: 0.3s;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0%;
+                height: 0.125rem;
+                background: $primary-cta-color;
+                transition: width 0.3s;
+            }
+            &:hover {
+                &::after {
+                    width: 100%;
+                    background: $secondary-cta-color;
+                }
+            }
+
+            &--active {
+                &::after {
+                    width: 100%;
+                    background: $primary-cta-color;
+                }
+            }
         }
     }
 }
