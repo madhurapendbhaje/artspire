@@ -4,10 +4,13 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import heartIcon from "../../assets/icons/heart.svg";
+import heartIcon from "../../assets/icons/heart-solid.svg";
 
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
+console.log(API_URL);
 
 class InspirePage extends Component {
     state = {
@@ -47,6 +50,18 @@ class InspirePage extends Component {
         }, 100);
     };
 
+    favoriteHandler = (event, url) => {
+        event.preventDefault();
+        const photoObj = {
+            url: url,
+            category: "sunrise", // Change to dynamic
+        };
+        axios
+            .post(`${API_URL}/photos`, photoObj)
+            .then((_response) => console.log("Saved to favorites"))
+            .catch((_err) => console.log("Not saved"));
+    };
+
     photoGrid(photoArrList) {
         return (
             <div className="photo-gallery">
@@ -76,14 +91,18 @@ class InspirePage extends Component {
                                                 }
                                                 className="photo-gallery__image"
                                             />
-                                            <div className="photo-gallery__image-overlay-container">
-                                                <div className="photo-gallery__image-overlay">
-                                                    <img
-                                                        src={heartIcon}
-                                                        alt="Heart Icon"
-                                                        className="photo-gallery__icon"
-                                                    />
-                                                </div>
+                                            <div className="photo-gallery__image-overlay">
+                                                <img
+                                                    src={heartIcon}
+                                                    alt="Heart Icon"
+                                                    className="photo-gallery__icon"
+                                                    onClick={(event) =>
+                                                        this.favoriteHandler(
+                                                            event,
+                                                            photo.urls.regular
+                                                        )
+                                                    }
+                                                />
                                             </div>
                                         </div>
                                     </Link>
@@ -99,7 +118,7 @@ class InspirePage extends Component {
     componentDidMount() {
         axios
             .get(
-                `${UNSPLASH_API_URL}/search/photos/?query=sunset&client_id=${UNSPLASH_API_KEY}&per_page=12`
+                `${UNSPLASH_API_URL}/search/photos/?query=sunrise&client_id=${UNSPLASH_API_KEY}&per_page=12`
             )
             .then((response) => {
                 this.setState({ photos: response.data.results });

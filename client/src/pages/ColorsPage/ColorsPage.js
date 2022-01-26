@@ -29,7 +29,7 @@ class ColorsPage extends Component {
 
         const mobileStyleObject = {
             width: 100 + "%",
-            height: 3.5 + "rem",
+            height: 2 + "rem",
         };
 
         const tabletStyleObject = {

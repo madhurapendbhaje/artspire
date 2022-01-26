@@ -17,10 +17,10 @@
     }
 
     &__image {
-        display: inline-block;
-        max-height: 70%;
+        width: 100%;
         @include desktop {
             margin: 0 auto;
+            width: 70%;
         }
     }
 
