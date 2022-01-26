@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
+import brushIcon from "../../assets/icons/paint-brush-solid.svg";
 import Search from "../../components/Search";
 
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
@@ -145,7 +146,19 @@ class InspirePage extends Component {
         }
         return (
             <>
-                <Search placeholderText="What do you feel like painting?" />
+                <div className="search-form">
+                    <form className="search-form__container">
+                        <Search placeholderText="What do you feel like painting?" />
+                        <button type="submit" className="search-form__button">
+                            <img
+                                src={brushIcon}
+                                alt="Paint brush icon"
+                                className="search-form__icon"
+                            />
+                        </button>
+                    </form>
+                </div>
+
                 {this.photoGrid(modifiedPhotoArr)}
             </>
         );
