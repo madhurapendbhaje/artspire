@@ -4,10 +4,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AuthButton from "./components/AuthButton";
 import LoginPage from "./components/LoginPage";
-import HomePage from "./components/HomePage";
 import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
 import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
 import InspirePage from "./pages/InspirePage";
 import ColorsPage from "./pages/ColorsPage";
 
@@ -17,6 +17,7 @@ class App extends Component {
             <Router>
                 <Header />
                 <div className="app">
+                    <Route exact path="/" component={HomePage} />
                     <Route
                         path="/inspire/:photoId/colors"
                         component={ColorsPage}

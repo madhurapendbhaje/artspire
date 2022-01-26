@@ -62,6 +62,14 @@ class InspirePage extends Component {
             .catch((_err) => console.log("Not saved"));
     };
 
+    submitHandler = (event) => {
+        event.preventDefault();
+        const input = event.target.search.value;
+        if (!input) {
+            alert("Fill search");
+        }
+    };
+
     photoGrid(photoArrList) {
         return (
             <div className="photo-gallery">
@@ -147,7 +155,10 @@ class InspirePage extends Component {
         return (
             <>
                 <div className="search-form">
-                    <form className="search-form__container">
+                    <form
+                        className="search-form__container"
+                        onSubmit={this.submitHandler}
+                    >
                         <Search placeholderText="What do you feel like painting?" />
                         <button type="submit" className="search-form__button">
                             <img
