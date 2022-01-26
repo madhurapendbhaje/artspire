@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
+import Search from "../../components/Search";
 
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
-
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
-console.log(API_URL);
 
 class InspirePage extends Component {
     state = {
@@ -135,18 +134,21 @@ class InspirePage extends Component {
     }
 
     render() {
-        if (this.state.error) {
+        if (this.state.photos.length === 0) {
             return <div>Finding photos...</div>;
         }
-        // For tablet window size, photo gallery will consist of two columns
-        if (this.state.windowSize >= 768 && this.state.windowSize < 1280) {
-            const modifiedPhotoArr = this.splitToChunks(this.state.photos, 2);
-            return this.photoGrid(modifiedPhotoArr);
+        let modifiedPhotoArr = [];
+        if (this.state.windowSize < 1280) {
+            modifiedPhotoArr = this.splitToChunks(this.state.photos, 2);
         } else {
-            // For desktop window size, photo gallery will consist of three columns
-            const modifiedPhotoArr = this.splitToChunks(this.state.photos, 3);
-            return this.photoGrid(modifiedPhotoArr);
+            modifiedPhotoArr = this.splitToChunks(this.state.photos, 3);
         }
+        return (
+            <>
+                <Search placeholderText="What do you feel like painting?" />
+                {this.photoGrid(modifiedPhotoArr)}
+            </>
+        );
     }
 }
 

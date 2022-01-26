@@ -1,11 +1,14 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/variables" as *;
 
 .photo-gallery {
     width: 100%;
     padding: 1rem 0 0 1rem;
     @include tablet {
         display: flex;
+        padding: 1rem $vertical-padding-tablet;
     }
 
     &__column {
