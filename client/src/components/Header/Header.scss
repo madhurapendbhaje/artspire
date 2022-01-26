@@ -1,0 +1,42 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/colors" as *;
+
+.header {
+    display: flex;
+    padding: 1rem $vertical-padding-mobile;
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo-link {
+        margin: 0 auto;
+
+        @include tablet {
+            margin: 0;
+            width: 20%;
+        }
+    }
+
+    &__logo {
+        width: 100%;
+        max-height: 5rem;
+
+        @include tablet {
+            max-width: 7.5rem;
+        }
+    }
+
+    &__navigation {
+        display: flex;
+
+        &-link {
+            text-decoration: none;
+            color: $primary-text-color;
+        }
+    }
+}

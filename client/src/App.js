@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage";
 import HomePage from "./components/HomePage";
 import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
+import Header from "./components/Header";
 import InspirePage from "./pages/InspirePage";
 import ColorsPage from "./pages/ColorsPage";
 
@@ -14,6 +15,7 @@ class App extends Component {
     render() {
         return (
             <Router>
+                <Header />
                 <div className="app">
                     <Route
                         path="/inspire/:photoId/colors"
