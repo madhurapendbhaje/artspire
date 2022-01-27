@@ -18,8 +18,11 @@
 
     &__image {
         width: 100%;
-        @include desktop {
+        @include tablet {
             margin: 0 auto;
+            width: 80%;
+        }
+        @include desktop {
             width: 70%;
         }
     }

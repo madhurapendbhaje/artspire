@@ -111,12 +111,21 @@ class InspirePage extends Component {
                                 key={`photo array ${index + 1}`}
                             >
                                 {photoArr.map((photo) => {
+                                    let tags = [];
+                                    photo.tags.forEach((tag) => {
+                                        if (tag.title !== "background") {
+                                            tags.push(tag.title);
+                                        }
+                                    });
                                     return (
                                         <Link
                                             to={{
                                                 pathname: `/inspire/${photo.id}/colors`,
                                                 state: {
                                                     url: photo.urls.regular,
+                                                    category:
+                                                        this.state.category,
+                                                    keywords: tags,
                                                 },
                                             }}
                                             key={photo.id}

@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import InspirePage from "./pages/InspirePage";
 import ColorsPage from "./pages/ColorsPage";
+import Tutorials from "./components/Tutorials";
 
 class App extends Component {
     render() {
@@ -23,6 +24,7 @@ class App extends Component {
                         component={ColorsPage}
                     />
                     <Route exact path="/inspire" component={InspirePage} />
+                    <Route path="/tutorials/:category" component={Tutorials} />
                     {/* <AuthButton />
                     <ul>
                         <li>
