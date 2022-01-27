@@ -75,9 +75,11 @@ class ColorsPage extends Component {
 
         return (
             <div className="color">
-                <ColorExtractor getColors={this.getColors}>
-                    <img src={URL} className="color__image" />
-                </ColorExtractor>
+                <div className="color__image-container">
+                    <ColorExtractor getColors={this.getColors}>
+                        <img src={URL} className="color__image" />
+                    </ColorExtractor>
+                </div>
                 <div className="color__palette-container">
                     {this.renderSwatches()}
                 </div>
