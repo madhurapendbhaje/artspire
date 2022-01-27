@@ -83,7 +83,6 @@ class InspirePage extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const input = event.target.search.value;
-        console.log(input);
         if (!input) {
             this.setState({ validationError: true });
             return;
