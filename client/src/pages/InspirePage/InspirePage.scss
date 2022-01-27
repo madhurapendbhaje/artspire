@@ -3,15 +3,17 @@
 @use "../../styles/partials/colors" as *;
 @use "../../styles/partials/variables" as *;
 
-.search-form {
-    margin: 0 auto;
-    padding: 0 $vertical-padding-mobile;
-    width: 100%;
-
-    @include tablet {
-        width: 60%;
-    }
+.search {
     &__container {
+        margin: 0 auto;
+        padding: 0 $vertical-padding-mobile;
+        width: 100%;
+
+        @include tablet {
+            width: 60%;
+        }
+    }
+    &__form-container {
         width: 100%;
         height: 2.5rem;
         display: flex;
@@ -20,6 +22,10 @@
 
         &:focus-within {
             border: 0.0625rem solid $primary-cta-color;
+        }
+
+        &--error {
+            border: 0.0625rem solid red;
         }
     }
     &__button {
@@ -38,7 +44,29 @@
         width: 1rem;
         height: 1rem;
     }
+
+    &__error-message {
+        font-size: 0.8rem;
+        color: red;
+    }
+
+    &__show-more-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__show-more {
+        margin-left: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: $primary-cta-color;
+        color: $secondary-text-color;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
 }
+
 .photo-gallery {
     width: 100%;
     padding: 1rem 0 0 1rem;

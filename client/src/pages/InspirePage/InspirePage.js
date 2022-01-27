@@ -17,6 +17,9 @@ class InspirePage extends Component {
         photos: [],
         error: false,
         windowSize: null,
+        validationError: false,
+        category: null,
+        page: 1,
     };
 
     // https://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
@@ -50,6 +53,21 @@ class InspirePage extends Component {
         }, 100);
     };
 
+    getPhotos = (category) => {
+        console.log("api call");
+        axios
+            .get(
+                `${UNSPLASH_API_URL}/search/photos/?query=${category}&client_id=${UNSPLASH_API_KEY}&per_page=6&page=${this.state.page}`
+            )
+            .then((response) => {
+                this.setState({ photos: response.data.results });
+            })
+            .catch((err) => {
+                console.log(err);
+                this.setState({ error: true });
+            });
+    };
+
     favoriteHandler = (event, url) => {
         event.preventDefault();
         const photoObj = {
@@ -65,76 +83,82 @@ class InspirePage extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         const input = event.target.search.value;
+        console.log(input);
         if (!input) {
-            alert("Fill search");
+            this.setState({ validationError: true });
+            return;
         }
+        this.setState({ category: input });
+        this.getPhotos(input);
+    };
+
+    moreHandler = (event) => {
+        event.preventDefault();
+        // Increment the page count to search new photos
+        let newPage = this.state.page + 1;
+        this.setState({ page: newPage });
+        this.getPhotos(this.state.category);
     };
 
     photoGrid(photoArrList) {
         return (
-            <div className="photo-gallery">
-                {photoArrList.map((photoArr, index) => {
-                    return (
-                        <div
-                            className="photo-gallery__column"
-                            key={`photo array ${index + 1}`}
-                        >
-                            {photoArr.map((photo) => {
-                                return (
-                                    <Link
-                                        to={{
-                                            pathname: `/inspire/${photo.id}/colors`,
-                                            state: { url: photo.urls.regular },
-                                        }}
-                                        key={photo.id}
-                                        className="photo-gallery__image-link"
-                                    >
-                                        <div className="photo-gallery__image-container">
-                                            <img
-                                                src={photo.urls.regular}
-                                                alt={
-                                                    photo.description
-                                                        ? photo.description
-                                                        : photo.alt_description
-                                                }
-                                                className="photo-gallery__image"
-                                            />
-                                            <div className="photo-gallery__image-overlay">
+            <>
+                <div className="photo-gallery">
+                    {photoArrList.map((photoArr, index) => {
+                        return (
+                            <div
+                                className="photo-gallery__column"
+                                key={`photo array ${index + 1}`}
+                            >
+                                {photoArr.map((photo) => {
+                                    return (
+                                        <Link
+                                            to={{
+                                                pathname: `/inspire/${photo.id}/colors`,
+                                                state: {
+                                                    url: photo.urls.regular,
+                                                },
+                                            }}
+                                            key={photo.id}
+                                            className="photo-gallery__image-link"
+                                        >
+                                            <div className="photo-gallery__image-container">
                                                 <img
-                                                    src={heartIcon}
-                                                    alt="Heart Icon"
-                                                    className="photo-gallery__icon"
-                                                    onClick={(event) =>
-                                                        this.favoriteHandler(
-                                                            event,
-                                                            photo.urls.regular
-                                                        )
+                                                    src={photo.urls.regular}
+                                                    alt={
+                                                        photo.description
+                                                            ? photo.description
+                                                            : photo.alt_description
                                                     }
+                                                    className="photo-gallery__image"
                                                 />
+                                                <div className="photo-gallery__image-overlay">
+                                                    <img
+                                                        src={heartIcon}
+                                                        alt="Heart Icon"
+                                                        className="photo-gallery__icon"
+                                                        onClick={(event) =>
+                                                            this.favoriteHandler(
+                                                                event,
+                                                                photo.urls
+                                                                    .regular
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    );
-                })}
-            </div>
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            </>
         );
     }
 
     componentDidMount() {
-        axios
-            .get(
-                `${UNSPLASH_API_URL}/search/photos/?query=sunrise&client_id=${UNSPLASH_API_KEY}&per_page=12`
-            )
-            .then((response) => {
-                this.setState({ photos: response.data.results });
-            })
-            .catch((err) => {
-                console.log(err);
-                this.setState({ error: true });
-            });
         this.checkWindowSize();
     }
 
@@ -143,35 +167,58 @@ class InspirePage extends Component {
     }
 
     render() {
-        if (this.state.photos.length === 0) {
-            return <div>Finding photos...</div>;
-        }
+        // if (this.state.photos.length === 0) {
+        //     return <div>Finding photos...</div>;
+        // }
         let modifiedPhotoArr = [];
         if (this.state.windowSize < 1280) {
-            modifiedPhotoArr = this.splitToChunks(this.state.photos, 2);
+            modifiedPhotoArr = this.splitToChunks(this.state?.photos, 2);
         } else {
-            modifiedPhotoArr = this.splitToChunks(this.state.photos, 3);
+            modifiedPhotoArr = this.splitToChunks(this.state?.photos, 3);
         }
         return (
-            <>
-                <div className="search-form">
+            <div className="search">
+                <div className="search__container">
+                    {this.state.validationError ? (
+                        <span className="search__error-message">
+                            This field is required
+                        </span>
+                    ) : null}
                     <form
-                        className="search-form__container"
+                        className={
+                            "search__form-container" +
+                            (this.state.validationError
+                                ? " search__form-container--error"
+                                : "")
+                        }
                         onSubmit={this.submitHandler}
                     >
                         <Search placeholderText="What do you feel like painting?" />
-                        <button type="submit" className="search-form__button">
+                        <button type="submit" className="search__button">
                             <img
                                 src={brushIcon}
                                 alt="Paint brush icon"
-                                className="search-form__icon"
+                                className="search__icon"
                             />
                         </button>
                     </form>
                 </div>
-
                 {this.photoGrid(modifiedPhotoArr)}
-            </>
+                {this.state.photos.length ? (
+                    <span className="search__show-more-container">
+                        {" "}
+                        Not inspired yet?
+                        <button
+                            className="search__show-more"
+                            onClick={this.moreHandler}
+                        >
+                            Show more
+                        </button>
+                    </span>
+                ) : (
+                    <></>
+                )}
+            </div>
         );
     }
 }
