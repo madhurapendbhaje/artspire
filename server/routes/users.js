@@ -25,7 +25,7 @@ router.get("/logout", (req, res) => {
 router.get(
     "/auth",
     passport.authenticate("google", {
-        successRedirect: "http://localhost:3000/users",
+        successRedirect: "http://localhost:3000/users/profile",
         failureRedirect: "http://localhost:3000/users/loginFailed",
     })
 );

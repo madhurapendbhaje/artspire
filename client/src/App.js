@@ -8,6 +8,7 @@ import UserProfile from "./components/UserProfile";
 import Favorites from "./components/Favorites";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
 import InspirePage from "./pages/InspirePage";
 import ColorsPage from "./pages/ColorsPage";
 import Tutorials from "./components/Tutorials";
@@ -25,6 +26,8 @@ class App extends Component {
                     />
                     <Route exact path="/inspire" component={InspirePage} />
                     <Route path="/tutorials/:category" component={Tutorials} />
+                    <Route path="/users/login" component={LoginPage} />
+                    <Route path="/users/profile" component={ProfilePage} />
                     {/* <AuthButton />
                     <ul>
                         <li>
