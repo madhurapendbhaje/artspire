@@ -1,0 +1,168 @@
+@use "../../styles/partials/global";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
+
+.profile-page {
+    position: relative;
+    height: 85vh;
+    &__container {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-weight: 400;
+        margin: 0;
+        padding: 1.5rem 0 1rem;
+    }
+
+    &__name {
+        font-weight: 700;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__form-title {
+        font-weight: 400;
+    }
+
+    &__form-button {
+        margin: 2rem auto;
+        padding: 0.5rem 2rem;
+        background-color: $primary-cta-color;
+        outline: none;
+        border: none;
+        border-radius: 0.25rem;
+        color: $secondary-text-color;
+    }
+
+    &__artwork-container {
+        width: 30%;
+        position: absolute;
+        bottom: 0;
+        right: 2.5rem;
+    }
+
+    &__artwork {
+        width: 100%;
+    }
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+
+    &__label {
+        padding: 1rem 2rem;
+        cursor: pointer;
+        user-select: none;
+        display: block;
+        position: relative;
+    }
+
+    &__option {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    &__checkmark {
+        position: absolute;
+        top: 1rem;
+        left: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+        border-radius: 50%;
+        background-color: #eeeeee;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+}
+
+.check {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+        padding: 1rem 2rem;
+        cursor: pointer;
+        user-select: none;
+        display: block;
+        position: relative;
+    }
+
+    &__option {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    &__checkmark-box {
+        position: absolute;
+        top: 1rem;
+        left: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+        background-color: #eeeeee;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+}
+
+.select__label:hover .select__option ~ .select__checkmark {
+    background-color: #cccccc;
+}
+
+.select__label .select__option:checked ~ .select__checkmark {
+    background-color: $primary-cta-color;
+}
+
+.select__label .select__option:checked ~ .select__checkmark:after {
+    display: block;
+}
+
+.select__label .select__checkmark:after {
+    top: 0.375rem;
+    left: 0.375rem;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background: white;
+}
+
+.check__label:hover .check__option ~ .check__checkmark-box {
+    background-color: #cccccc;
+}
+
+.check__label .check__option:checked ~ .check__checkmark-box {
+    background-color: $primary-cta-color;
+}
+
+.check__label .check__option:checked ~ .check__checkmark-box:after {
+    display: block;
+}
+
+.check__label .check__checkmark-box:after {
+    top: 0.25rem;
+    left: 0.4375rem;
+    width: 0.3125rem;
+    height: 0.625rem;
+    border: solid white;
+    border-width: 0 0.1875rem 0.1875rem 0;
+    transform: rotate(45deg);
+}
