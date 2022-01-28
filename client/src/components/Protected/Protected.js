@@ -18,7 +18,6 @@ class Protected extends Component {
                 withCredentials: true,
             })
             .then((res) => {
-                console.log(res);
                 this.setState({
                     isAuthenticating: false,
                     isAuthenticated: true,

@@ -1,7 +1,7 @@
 import "./ProfilePage.scss";
 
-function ProfilePage() {
-    return <div>Profile</div>;
+function ProfilePage(props) {
+    return <div>Welcome {props.user.displayName} !</div>;
 }
 
 export default ProfilePage;

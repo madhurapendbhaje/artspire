@@ -41,6 +41,14 @@
             color: $secondary-text-color;
             border-radius: $border-radius;
         }
+        &-logout {
+            padding: 0.5rem 1.5rem;
+            outline: none;
+            border: none;
+            background-color: $primary-cta-color;
+            color: $secondary-text-color;
+            border-radius: $border-radius;
+        }
 
         &-link {
             padding: 0.5rem 1.5rem;

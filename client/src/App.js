@@ -25,9 +25,12 @@ class App extends Component {
                         component={ColorsPage}
                     />
                     <Protected exact path="/inspire" component={InspirePage} />
-                    <Route path="/tutorials/:category" component={Tutorials} />
+                    <Protected
+                        path="/tutorials/:category"
+                        component={Tutorials}
+                    />
                     <Route path="/users/login" component={LoginPage} />
-                    <Route path="/users/profile" component={ProfilePage} />
+                    <Protected path="/users/profile" component={ProfilePage} />
                     {/* <AuthButton />
                     <ul>
                         <li>
