@@ -3,6 +3,7 @@ import "./LoginPage.scss";
 import React, { Component } from "react";
 
 import googleIcon from "../../assets/icons/google.svg";
+import loginImage from "../../assets/images/login.svg";
 
 class Login extends Component {
     login = () => {
@@ -20,18 +21,30 @@ class Login extends Component {
     render() {
         return (
             <div className="login">
-                <div className="login__container">
-                    <p className="login__title">Log In to Artpsire</p>
-                    <div className="login__sub-container">
-                        <img
-                            src={googleIcon}
-                            alt="google logo"
-                            className="login__logo"
-                        />
-                        <button onClick={this.login} className="login__button">
-                            Continue with Google
-                        </button>
+                <div className="login__hero">
+                    <div className="login__hero-container">
+                        <p className="login__title">Log In to Artpsire</p>
+                        <div className="login__sub-container">
+                            <img
+                                src={googleIcon}
+                                alt="google logo"
+                                className="login__logo"
+                            />
+                            <button
+                                onClick={this.login}
+                                className="login__button"
+                            >
+                                Continue with Google
+                            </button>
+                        </div>
                     </div>
+                </div>
+                <div className="login__artwork">
+                    <img
+                        src={loginImage}
+                        alt="Login artwork"
+                        className="login__artwork-image"
+                    />
                 </div>
             </div>
         );
