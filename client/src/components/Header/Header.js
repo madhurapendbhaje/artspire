@@ -25,6 +25,12 @@ function Header() {
                     >
                         Tutorials
                     </NavLink>
+                    <NavLink
+                        to="/users/login"
+                        className="header__navigation-login"
+                    >
+                        Log In
+                    </NavLink>
                 </nav>
             </header>
         </>
