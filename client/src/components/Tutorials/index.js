@@ -1,1 +1,1 @@
-export { default } from "./Tutorials.js";
+export { default } from "./Tutorials";

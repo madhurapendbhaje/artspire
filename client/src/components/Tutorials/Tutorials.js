@@ -12,7 +12,6 @@ class Tutorials extends Component {
     };
     componentDidMount() {
         const keywords = this.props.location.state.keywords;
-        console.log(keywords.join());
         axios
             .get(
                 `${YOUTUBE_API_URL}/?part=snippet&q=watercolor,${keywords.join()}&key=${YOUTUBE_API_KEY}`
@@ -28,7 +27,7 @@ class Tutorials extends Component {
                 {this.state.tutorials.map((video) => {
                     const { id, snippet } = video;
                     return (
-                        <div key={id.videoId}>
+                        <div key={id.videoId} className="video-grid">
                             <iframe
                                 width="560"
                                 height="315"
