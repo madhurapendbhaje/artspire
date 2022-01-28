@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
-class Favorites extends Component {
+class Protected extends Component {
     state = {
         isAuthenticating: true,
         isAuthenticated: false,
@@ -63,4 +63,4 @@ class Favorites extends Component {
     }
 }
 
-export default Favorites;
+export default Protected;

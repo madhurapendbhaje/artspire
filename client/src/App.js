@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AuthButton from "./components/AuthButton";
 import LoginPage from "./components/LoginPage";
 import UserProfile from "./components/UserProfile";
-import Favorites from "./components/Favorites";
+import Protected from "./components/Protected";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -24,7 +24,7 @@ class App extends Component {
                         path="/inspire/:photoId/colors"
                         component={ColorsPage}
                     />
-                    <Route exact path="/inspire" component={InspirePage} />
+                    <Protected exact path="/inspire" component={InspirePage} />
                     <Route path="/tutorials/:category" component={Tutorials} />
                     <Route path="/users/login" component={LoginPage} />
                     <Route path="/users/profile" component={ProfilePage} />
