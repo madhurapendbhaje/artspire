@@ -1,3 +1,7 @@
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/variables" as *;
+
 .login {
     display: flex;
 
@@ -5,7 +9,32 @@
         margin: 0 auto;
         border-radius: 0.25rem;
         max-width: 25rem;
-        padding: 1rem 2rem;
+        padding: 1rem 3rem;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    }
+    &__title {
+        text-align: center;
+        font-weight: 600;
+    }
+
+    &__sub-container {
+        display: flex;
+        align-items: center;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        padding: 0 2rem;
+    }
+
+    &__logo {
+        width: 1.125rem;
+    }
+
+    &__button {
+        padding: 0.5rem;
+        color: $primary-text-color;
+        background-color: #ffffff;
+        outline: none;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
     }
 }

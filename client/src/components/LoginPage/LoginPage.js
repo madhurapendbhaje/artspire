@@ -1,4 +1,8 @@
+import "./LoginPage.scss";
+
 import React, { Component } from "react";
+
+import googleIcon from "../../assets/icons/google.svg";
 
 class Login extends Component {
     login = () => {
@@ -15,9 +19,20 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <p>You must log in to view the page</p>
-                <button onClick={this.login}>Log in</button>
+            <div className="login">
+                <div className="login__container">
+                    <p className="login__title">Log In to Artpsire</p>
+                    <div className="login__sub-container">
+                        <img
+                            src={googleIcon}
+                            alt="google logo"
+                            className="login__logo"
+                        />
+                        <button onClick={this.login} className="login__button">
+                            Continue with Google
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
