@@ -9,6 +9,8 @@ exports.up = function (knex) {
         table.string("last_name").notNullable();
         table.string("email").notNullable().unique();
         table.string("picture");
+        table.string("proficiency_level");
+        table.boolean("is_profile_complete").defaultTo(false);
     });
 };
 
