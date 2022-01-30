@@ -1,14 +1,20 @@
 import "./Header.scss";
 
 import logo from "../../assets/logo/artspire.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Component } from "react";
 import axios from "axios";
+
+import userLogo from "../../assets/icons/user-solid.svg";
+import logoutIcon from "../../assets/icons/logout.svg";
+import upArrow from "../../assets/icons/angle-up-solid.svg";
+import downArrow from "../../assets/icons/angle-down-solid.svg";
 
 class Header extends Component {
     state = {
         isAuthenticated: false,
         user: null,
+        showDropdown: false,
     };
 
     componentDidMount() {
@@ -37,6 +43,63 @@ class Header extends Component {
         window.location = `http://localhost:8080/users/logout?from=${url}`;
     };
 
+    toggleMenu = () => {
+        this.setState((prevState) => ({
+            showDropdown: !prevState.showDropdown,
+        }));
+    };
+
+    dropdownMenu() {
+        return (
+            <div className="profile">
+                <div className="profile__image-container">
+                    <img
+                        src={this.state.user.picture}
+                        className="profile__image"
+                    />
+                </div>
+                {this.state.showDropdown ? (
+                    <img
+                        src={upArrow}
+                        className="profile__icon"
+                        onClick={this.toggleMenu}
+                    />
+                ) : (
+                    <img
+                        src={downArrow}
+                        className="profile__icon"
+                        onClick={this.toggleMenu}
+                    />
+                )}
+                {this.state.showDropdown && (
+                    <div className="profile__menu">
+                        <Link className="profile__menu-item">
+                            <img
+                                src={userLogo}
+                                alt="User logo"
+                                className="profile__menu-item-icon"
+                            />
+                            <p className="profile__menu-item-text">
+                                My Profile
+                            </p>
+                        </Link>
+                        <Link
+                            className="profile__menu-item"
+                            onClick={this.signOut}
+                        >
+                            <img
+                                src={logoutIcon}
+                                alt="Logout icon"
+                                className="profile__menu-item-icon"
+                            />
+                            <p className="profile__menu-item-text">Logout</p>
+                        </Link>
+                    </div>
+                )}
+            </div>
+        );
+    }
+
     render() {
         if (this.state.isAuthenticated) {
             return (
@@ -59,12 +122,7 @@ class Header extends Component {
                         >
                             Tutorials
                         </NavLink>
-                        <button
-                            className="header__navigation-logout"
-                            onClick={this.signOut}
-                        >
-                            Log Out
-                        </button>
+                        {this.dropdownMenu()}
                     </nav>
                 </header>
             );
