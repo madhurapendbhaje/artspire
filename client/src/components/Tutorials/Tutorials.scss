@@ -30,7 +30,12 @@
         justify-content: space-between;
 
         @include tablet {
-            display: 90%;
+            display: 80%;
+        }
+
+        @include desktop {
+            width: 70%;
+            margin: 0 auto;
         }
     }
 
@@ -39,11 +44,12 @@
         padding: 1rem 2rem;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
         width: 100%;
+        min-height: 20rem;
         overflow: hidden;
 
         @include tablet {
             width: 48%;
-            min-height: 28%;
+            min-height: 35%;
         }
 
         @include desktop {
