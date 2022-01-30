@@ -3,13 +3,10 @@
 
 .video-grid {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
     padding: $vertical-padding-mobile;
 
     @include tablet {
+        display: flex;
         padding: 1rem $vertical-padding-tablet;
     }
 
@@ -17,22 +14,53 @@
         padding: 1rem $vertical-padding-desktop;
     }
 
-    &__video-container {
+    &__save {
+        width: 5%;
+    }
+    &__icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &__container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        @include tablet {
+            display: 90%;
+        }
+    }
+
+    &__video-frame {
         margin-bottom: 2rem;
-        width: 30%;
-        padding: 2rem;
+        padding: 1rem 2rem;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        width: 100%;
+        overflow: hidden;
+
+        @include tablet {
+            width: 48%;
+            min-height: 28%;
+        }
+
+        @include desktop {
+            width: 32%;
+            height: 55%;
+        }
     }
 
     &__video {
-        width: 25rem;
-        height: 14rem;
+        width: 100%;
+        min-height: 70%;
         border-radius: 0.25rem;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        display: block;
     }
 
     &__caption-container {
-        margin-top: 1rem;
+        padding: 1rem 0;
         display: flex;
         justify-content: space-between;
     }
@@ -40,9 +68,5 @@
     &__caption {
         margin: 0;
         width: 80%;
-    }
-    &__icon {
-        width: 1rem;
-        height: 1rem;
     }
 }
