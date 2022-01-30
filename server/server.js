@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const knex = require("./knexConfig");
 const userRoutes = require("./routes/users");
 const photoRoutes = require("./routes/photos");
+const tutorialRoutes = require("./routes/tutorials");
 
 // Read env variables
 require("dotenv").config();
@@ -131,6 +132,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/users", userRoutes);
 app.use("/photos", photoRoutes);
+app.use("/tutorials", tutorialRoutes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
