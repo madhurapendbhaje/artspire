@@ -71,8 +71,9 @@ class InspirePage extends Component {
     favoriteHandler = (event, url) => {
         event.preventDefault();
         const photoObj = {
+            user_id: this.props.user.id,
             url: url,
-            category: "sunrise", // Change to dynamic
+            category: this.state.category,
         };
         axios
             .post(`${API_URL}/photos`, photoObj)
