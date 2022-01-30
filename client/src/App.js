@@ -20,7 +20,7 @@ class App extends Component {
                 <Header />
                 <div className="app">
                     <Route exact path="/" component={HomePage} />
-                    <Route
+                    <Protected
                         path="/inspire/:photoId/colors"
                         component={ColorsPage}
                     />

@@ -1,11 +1,14 @@
 import "./ColorsPage.scss";
 
 import { Component } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ColorExtractor } from "react-color-extractor";
+import axios from "axios";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
 import backIcon from "../../assets/icons/angle-left-solid.svg";
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 class ColorsPage extends Component {
     state = {
@@ -63,6 +66,20 @@ class ColorsPage extends Component {
         this.setState((state) => ({ colors: [...state.colors, ...colors] }));
     };
 
+    favoriteHandler = (event, url, category) => {
+        event.preventDefault();
+        console.log(this.props);
+        const photoObj = {
+            user_id: this.props.user.id,
+            url: url,
+            category: category,
+        };
+        axios
+            .post(`${API_URL}/photos`, photoObj)
+            .then((_response) => console.log("Saved to favorites"))
+            .catch((_err) => console.log("Not saved"));
+    };
+
     componentDidMount() {
         this.checkWindowSize();
     }
@@ -99,6 +116,9 @@ class ColorsPage extends Component {
                         src={heartIcon}
                         slt="Heart icon"
                         className="color__icon"
+                        onClick={(event) => {
+                            this.favoriteHandler(event, URL, category);
+                        }}
                     />
                     <Link
                         to={{
