@@ -73,7 +73,11 @@ class Header extends Component {
                 )}
                 {this.state.showDropdown && (
                     <div className="profile__menu">
-                        <Link className="profile__menu-item">
+                        <Link
+                            className="profile__menu-item"
+                            to="/users"
+                            onClick={this.toggleMenu}
+                        >
                             <img
                                 src={userLogo}
                                 alt="User logo"
