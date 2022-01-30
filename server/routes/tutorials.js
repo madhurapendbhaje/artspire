@@ -15,16 +15,21 @@ router.post("/", (req, res) => {
             const userTutorialObj = {
                 id: uuidv4(),
                 user_id: req.body.user_id,
-                tutorial_id: photoObj.id,
+                tutorial_id: tutorialObj.id,
             };
+            console.log(userTutorialObj);
             knex("user_tutorial")
                 .insert(userTutorialObj)
-                .catch((_err) =>
-                    res.status(500).send("Could not save to favorites")
-                );
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).send("Could not save to favorites");
+                });
             return res.status(201).send("Saved to tutorials");
         })
-        .catch((_err) => res.status(400).send("Could not save the tutorial"));
+        .catch((err) => {
+            console.log(err);
+            res.status(400).send("Could not save the tutorial");
+        });
 });
 
 module.exports = router;
