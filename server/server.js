@@ -90,14 +90,14 @@ passport.use(
                         .insert(newUser)
                         .then(() => {
                             // this profile will get saved in express session
-                            return done(null, profile);
+                            return done(null, newUser);
                         })
                         .catch((err) =>
                             console.log(`User creation failed: ${err}`)
                         );
                 } else {
                     // User exists, don't create a new record
-                    return done(null, profile);
+                    return done(null, newUser);
                 }
             })
             .catch((err) => {

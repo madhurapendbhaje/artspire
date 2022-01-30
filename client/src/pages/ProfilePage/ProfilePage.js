@@ -1,8 +1,11 @@
 import "./ProfilePage.scss";
 
 import { Component } from "react";
+import axios from "axios";
 
 import profileImg from "../../assets/images/preferences.svg";
+
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 class ProfilePage extends Component {
     state = {
@@ -42,8 +45,20 @@ class ProfilePage extends Component {
      */
     submitHandler = (event) => {
         event.preventDefault();
-        console.log(this.state.level);
-        console.log(this.state.medium);
+
+        const userId = this.props.user.id;
+        const userPref = {
+            level: this.state.level,
+            medium: this.state.medium,
+        };
+        axios
+            .put(`${API_URL}/users/${userId}`, userPref)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     /**
@@ -164,13 +179,15 @@ class ProfilePage extends Component {
     };
 
     render() {
+        console.log(this.props.user);
+        const { first_name, last_name } = this.props.user;
         return (
             <div className="profile-page">
                 <div className="profile-page__container">
                     <h1 className="profile-page__title">
                         Welcome{" "}
                         <span className="profile-page__name">
-                            {this.props.user.displayName}
+                            {first_name + " " + last_name}
                         </span>{" "}
                         !
                     </h1>
