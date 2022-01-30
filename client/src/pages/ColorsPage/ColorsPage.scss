@@ -1,25 +1,29 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/colors" as *;
 
 .color {
-    padding: $vertical-padding-mobile;
-    height: 70rem;
+    margin: $vertical-padding-mobile;
+    height: 80vh;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
     // max-height: 100vh;
     // contain: content;
 
     @include tablet {
         // display: flex;
         // flex-direction: column;
-        padding: 2rem $vertical-padding-tablet;
+        margin: 2rem $vertical-padding-tablet;
     }
 
     @include desktop {
-        padding: 2rem $vertical-padding-desktop;
+        margin: 2rem $vertical-padding-desktop;
     }
 
     &__image-container {
-        height: 60%;
+        padding-top: 4rem;
+        height: 80%;
     }
 
     &__image {
@@ -48,5 +52,28 @@
 
     &__palette {
         width: 100%;
+    }
+
+    &__cta {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+    }
+
+    &__button {
+        margin-left: 1rem;
+        padding: 0.5rem 2rem;
+        color: $secondary-text-color;
+        background-color: $primary-cta-color;
+        text-decoration: none;
+        border-radius: 0.25rem;
+    }
+
+    &__icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
     }
 }

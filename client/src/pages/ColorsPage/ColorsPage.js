@@ -1,8 +1,11 @@
 import "./ColorsPage.scss";
 
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ColorExtractor } from "react-color-extractor";
+
+import heartIcon from "../../assets/icons/heart-solid.svg";
+import backIcon from "../../assets/icons/angle-left-solid.svg";
 
 class ColorsPage extends Component {
     state = {
@@ -75,6 +78,14 @@ class ColorsPage extends Component {
 
         return (
             <div className="color">
+                <img
+                    src={backIcon}
+                    alt="back icon"
+                    className="color__icon"
+                    onClick={() => {
+                        this.props.history.goBack();
+                    }}
+                />
                 <div className="color__image-container">
                     <ColorExtractor getColors={this.getColors}>
                         <img src={URL} className="color__image" />
@@ -83,17 +94,21 @@ class ColorsPage extends Component {
                 <div className="color__palette-container">
                     {this.renderSwatches()}
                 </div>
-                <div>
-                    Checkout these{" "}
+                <div className="color__cta">
+                    <img
+                        src={heartIcon}
+                        slt="Heart icon"
+                        className="color__icon"
+                    />
                     <Link
                         to={{
                             pathname: `/tutorials/${category}`,
                             state: { keywords: keywords },
                         }}
+                        className="color__button"
                     >
-                        tutorials
-                    </Link>{" "}
-                    to learn some techniques.
+                        Tutorials
+                    </Link>
                 </div>
             </div>
         );
