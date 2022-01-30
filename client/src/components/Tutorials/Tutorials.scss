@@ -1,3 +1,48 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
 .video-grid {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    padding: $vertical-padding-mobile;
+
+    @include tablet {
+        padding: 1rem $vertical-padding-tablet;
+    }
+
+    @include desktop {
+        padding: 1rem $vertical-padding-desktop;
+    }
+
+    &__video-container {
+        margin-bottom: 2rem;
+        width: 30%;
+        padding: 2rem;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    }
+
+    &__video {
+        width: 25rem;
+        height: 14rem;
+        border-radius: 0.25rem;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    }
+
+    &__caption-container {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__caption {
+        margin: 0;
+        width: 80%;
+    }
+    &__icon {
+        width: 1rem;
+        height: 1rem;
+    }
 }
