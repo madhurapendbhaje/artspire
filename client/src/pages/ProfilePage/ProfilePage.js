@@ -11,6 +11,7 @@ class ProfilePage extends Component {
     state = {
         level: "beginner",
         medium: [],
+        isProfileUpdated: false,
     };
 
     /**
@@ -53,8 +54,8 @@ class ProfilePage extends Component {
         };
         axios
             .put(`${API_URL}/users/${userId}`, userPref)
-            .then((response) => {
-                console.log(response);
+            .then((_response) => {
+                this.setState({ isProfileUpdated: true });
             })
             .catch((err) => {
                 console.log(err);
@@ -181,6 +182,9 @@ class ProfilePage extends Component {
     render() {
         console.log(this.props.user);
         const { first_name, last_name } = this.props.user;
+        if (this.state.isProfileUpdated) {
+            return <div> Welcome back!</div>;
+        }
         return (
             <div className="profile-page">
                 <div className="profile-page__container">
