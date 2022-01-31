@@ -12,7 +12,6 @@ class ProfilePage extends Component {
     state = {
         level: "beginner",
         medium: [],
-        isProfileUpdated: false,
         user: null,
     };
 
@@ -42,6 +41,16 @@ class ProfilePage extends Component {
         this.setState({ medium: currentMedium });
     };
 
+    getUserDetails() {
+        axios
+            .get(`${API_URL}/users/${this.props.user.id}`)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({ user: res.data });
+            })
+            .catch((err) => console.log(err));
+    }
+
     /**
      * Handler to update user profile in backend upon form submission
      * @param {object} event
@@ -57,7 +66,7 @@ class ProfilePage extends Component {
         axios
             .put(`${API_URL}/users/${userId}`, userPref)
             .then((_response) => {
-                this.setState({ isProfileUpdated: true });
+                this.getUserDetails();
             })
             .catch((err) => {
                 console.log(err);
@@ -182,17 +191,11 @@ class ProfilePage extends Component {
     };
 
     componentDidMount() {
-        axios
-            .get(`${API_URL}/users/${this.props.user.id}`)
-            .then((res) => {
-                console.log(res.data);
-                this.setState({ user: res.data });
-            })
-            .catch((err) => console.log(err));
+        this.getUserDetails();
     }
 
     render() {
-        console.log(this.props.user);
+        console.log("render");
         const { first_name, last_name } = this.props.user;
         if (this.state.user?.is_profile_complete === 1) {
             return <UserHome userId={this.props.user.id} />;

@@ -7,6 +7,7 @@ import axios from "axios";
 import imageIcon from "../../assets/icons/image.svg";
 import playIcon from "../../assets/icons/youtube.svg";
 import noVideoImg from "../../assets/icons/no-video.svg";
+import noPhotoImg from "../../assets/icons/no-photo.svg";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -33,20 +34,31 @@ class UserHome extends Component {
     contentRender() {
         let arr = [];
         let noImg = null;
+        let link = null;
+        let linkText = null;
+        let imgClass = null;
         if (this.state.content === "images") {
             arr = this.state.user.photos;
+            noImg = noPhotoImg;
+            link = "/inspire";
+            linkText = "Inspire Me";
+            imgClass = "nothing-display__image";
         } else if (this.state.content === "tutorials") {
             arr = this.state.user.tutorials;
             noImg = noVideoImg;
+            link = "/tutorials";
+            linkText = "Tutorials";
+            imgClass =
+                "nothing-display__image nothing-display__image--tutorial";
         }
         if (arr.length === 0) {
             return (
                 <div className="nothing-display">
-                    <img src={noImg} className="nothing-display__image" />
+                    <img src={noImg} className={imgClass} />
                     <p className="nothing-display__caption">
                         Nothing saved yet, explore{" "}
-                        <Link to="/tutorials" className="nothing-display__link">
-                            Tutorials
+                        <Link to={link} className="nothing-display__link">
+                            {linkText}
                         </Link>{" "}
                         for some inspiration!{" "}
                     </p>
@@ -71,7 +83,7 @@ class UserHome extends Component {
 
     render() {
         if (!this.state.user) {
-            return <p>Loading</p>;
+            return <p>Loading..</p>;
         }
         return (
             <div className="user-home">

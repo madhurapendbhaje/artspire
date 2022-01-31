@@ -89,6 +89,10 @@
         display: block;
         margin: 8rem auto;
         width: 30%;
+
+        &--tutorial {
+            width: 15%;
+        }
     }
 
     &__caption {
