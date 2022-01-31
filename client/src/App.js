@@ -9,7 +9,6 @@ import Protected from "./components/Protected";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
-import UserHome from "./pages/UserHome";
 import InspirePage from "./pages/InspirePage";
 import ColorsPage from "./pages/ColorsPage";
 import Tutorials from "./components/Tutorials";
@@ -30,7 +29,6 @@ class App extends Component {
                         path="/tutorials/:category"
                         component={Tutorials}
                     />
-                    <Protected exact="/users" component={UserHome} />
                     <Route path="/users/login" component={LoginPage} />
                     <Protected path="/users/profile" component={ProfilePage} />
                     {/* <AuthButton />
