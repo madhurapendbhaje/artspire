@@ -28,13 +28,11 @@ class Tutorials extends Component {
 
     favoriteHandler = (event, url, category) => {
         event.preventDefault();
-        console.log(this.props);
         const tutorialObj = {
             user_id: this.props.user.id,
             url: url,
             category: category,
         };
-        console.log(tutorialObj);
         axios
             .post(`${API_URL}/tutorials`, tutorialObj)
             .then((_response) => console.log("Saved to favorites"))

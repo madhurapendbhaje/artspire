@@ -15,6 +15,23 @@ class TutorialsPage extends Component {
         error: false,
     };
 
+    favoriteHandler = (event, url, title, category) => {
+        event.preventDefault();
+        const tutorialObj = {
+            user_id: this.props.user.id,
+            url: url,
+            title: title,
+            category: category,
+        };
+        axios
+            .post(`${API_URL}/tutorials`, tutorialObj)
+            .then((_response) => console.log("Saved to favorites"))
+            .catch((err) => {
+                console.log("Not saved");
+                console.log(err);
+            });
+    };
+
     componentDidMount() {
         axios
             .get(`${API_URL}/users/${this.props.user.id}/mediums`)
@@ -65,7 +82,14 @@ class TutorialsPage extends Component {
                                                 videoId={video.id.videoId}
                                                 url={`https://www.youtube.com/embed/${video.id.videoId}`}
                                                 title={video.snippet.title}
-                                                favoriteHandler="test"
+                                                favoriteHandler={(event) => {
+                                                    this.favoriteHandler(
+                                                        event,
+                                                        `https://www.youtube.com/embed/${video.id.videoId}`,
+                                                        video.snippet.title,
+                                                        "techniques"
+                                                    );
+                                                }}
                                                 key={video.id.videoId}
                                             />
                                         );
