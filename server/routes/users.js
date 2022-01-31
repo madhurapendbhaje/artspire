@@ -52,6 +52,7 @@ router.get("/:id", (req, res) => {
                 .where({ user_id: req.params.id })
                 .then((response) => {
                     userObj.photos = response;
+                    userObj.tutorials = [];
                     return res.send(userObj);
                 });
         })

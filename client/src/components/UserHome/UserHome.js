@@ -1,10 +1,12 @@
 import "./UserHome.scss";
 
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import imageIcon from "../../assets/icons/image.svg";
 import playIcon from "../../assets/icons/youtube.svg";
+import noVideoImg from "../../assets/icons/no-video.svg";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -29,7 +31,28 @@ class UserHome extends Component {
     }
 
     contentRender() {
+        let arr = [];
+        let noImg = null;
         if (this.state.content === "images") {
+            arr = this.state.user.photos;
+        } else if (this.state.content === "tutorials") {
+            arr = this.state.user.tutorials;
+            noImg = noVideoImg;
+        }
+        if (arr.length === 0) {
+            return (
+                <div className="nothing-display">
+                    <img src={noImg} className="nothing-display__image" />
+                    <p className="nothing-display__caption">
+                        Nothing saved yet, explore{" "}
+                        <Link to="/tutorials" className="nothing-display__link">
+                            Tutorials
+                        </Link>{" "}
+                        for some inspiration!{" "}
+                    </p>
+                </div>
+            );
+        } else {
             return (
                 <div className="image-grid">
                     {this.state.user.photos.map((photo) => {
@@ -81,7 +104,12 @@ class UserHome extends Component {
                             />
                             <p className="user-home__menu-label">Images</p>
                         </div>
-                        <div className="user-home__menu-item">
+                        <div
+                            className="user-home__menu-item"
+                            onClick={() => {
+                                this.toggleContent("tutorials");
+                            }}
+                        >
                             <img
                                 src={playIcon}
                                 className="user-home__menu-icon"
