@@ -40,6 +40,24 @@ router.get("/check-auth", (req, res) => {
     res.status(200).json(req.user);
 });
 
+// Get User details
+router.get("/:id", (req, res) => {
+    let userObj = {};
+    knex("users")
+        .where({ id: req.params.id })
+        .then((response) => {
+            userObj = { ...response[0] };
+            knex("user_photo")
+                .join("photos", "photos.id", "user_photo.photo_id")
+                .where({ user_id: req.params.id })
+                .then((response) => {
+                    userObj.photos = response;
+                    return res.send(userObj);
+                });
+        })
+        .catch((_err) => res.status(400).send("User not found"));
+});
+
 // Update user profile
 router.put("/:id", (req, res) => {
     const data = req.body;
