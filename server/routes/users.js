@@ -141,8 +141,6 @@ router.put("/:id", (req, res) => {
                 return res.status(500).send("Could not save preferences");
             });
     });
-
-    res.send("User preferences saved");
 });
 
 module.exports = router;

@@ -77,8 +77,8 @@ class InspirePage extends Component {
         };
         axios
             .post(`${API_URL}/photos`, photoObj)
-            .then((_response) => console.log("Saved to favorites"))
-            .catch((_err) => console.log("Not saved"));
+            .then((response) => console.log(response.data))
+            .catch((err) => console.log(`Not saved ${err}`));
     };
 
     submitHandler = (event) => {
