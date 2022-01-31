@@ -45,7 +45,6 @@ class ProfilePage extends Component {
         axios
             .get(`${API_URL}/users/${this.props.user.id}`)
             .then((res) => {
-                console.log(res.data);
                 this.setState({ user: res.data });
             })
             .catch((err) => console.log(err));
@@ -195,7 +194,6 @@ class ProfilePage extends Component {
     }
 
     render() {
-        console.log("render");
         const { first_name, last_name } = this.props.user;
         if (this.state.user?.is_profile_complete === 1) {
             return <UserHome userId={this.props.user.id} />;

@@ -40,6 +40,33 @@ router.get("/check-auth", (req, res) => {
     res.status(200).json(req.user);
 });
 
+function getUserPhotos(userId) {
+    let result = [];
+    knex("user_photo")
+        .join("photos", "photos.id", "user_photo.photo_id")
+        .where({ user_id: userId })
+        .then((response) => {
+            result = response;
+            return result;
+        })
+        .catch((_err) => {
+            return result;
+        });
+}
+
+function getUserTutorials(userId) {
+    let result = [];
+    knex("user_tutorial")
+        .join("tutorials", "tutorials.id", "user_tutorial.tutorial_id")
+        .where({ user_id: userId })
+        .then((response) => {
+            console.log(response);
+            result = response;
+            return result;
+        })
+        .catch((_err) => result);
+}
+
 // Get User details
 router.get("/:id", (req, res) => {
     let userObj = {};
@@ -52,8 +79,17 @@ router.get("/:id", (req, res) => {
                 .where({ user_id: req.params.id })
                 .then((response) => {
                     userObj.photos = response;
-                    userObj.tutorials = [];
-                    return res.send(userObj);
+                    knex("user_tutorial")
+                        .join(
+                            "tutorials",
+                            "tutorials.id",
+                            "user_tutorial.tutorial_id"
+                        )
+                        .where({ user_id: req.params.id })
+                        .then((response) => {
+                            userObj.tutorials = response;
+                            return res.send(userObj);
+                        });
                 });
         })
         .catch((_err) => res.status(400).send("User not found"));

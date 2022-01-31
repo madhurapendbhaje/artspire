@@ -66,15 +66,39 @@ class UserHome extends Component {
             );
         } else {
             return (
-                <div className="image-grid">
-                    {this.state.user.photos.map((photo) => {
-                        return (
-                            <img
-                                src={photo.url}
-                                alt={photo.id}
-                                className="image-grid__image"
-                            />
-                        );
+                <div
+                    className={
+                        this.state.content === "images"
+                            ? "grid"
+                            : "grid grid--video"
+                    }
+                >
+                    {arr.map((arrElem) => {
+                        if (this.state.content === "images") {
+                            return (
+                                <img
+                                    src={arrElem.url}
+                                    alt={arrElem.id}
+                                    key={arrElem.id}
+                                    className="grid__image"
+                                />
+                            );
+                        } else {
+                            return (
+                                <div className="grid__video-container">
+                                    <div className="grid__video-frame">
+                                        <iframe
+                                            src={arrElem.url}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            key={arrElem.id}
+                                            className="grid__video"
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        }
                     })}
                 </div>
             );
@@ -105,7 +129,11 @@ class UserHome extends Component {
                     </div>
                     <div className="user-home__menu">
                         <div
-                            className="user-home__menu-item user-home__menu-item--active"
+                            className={
+                                this.state.content === "images"
+                                    ? "user-home__menu-item user-home__menu-item--active"
+                                    : "user-home__menu-item"
+                            }
                             onClick={() => {
                                 this.toggleContent("images");
                             }}
@@ -117,7 +145,11 @@ class UserHome extends Component {
                             <p className="user-home__menu-label">Images</p>
                         </div>
                         <div
-                            className="user-home__menu-item"
+                            className={
+                                this.state.content === "tutorials"
+                                    ? "user-home__menu-item user-home__menu-item--active"
+                                    : "user-home__menu-item"
+                            }
                             onClick={() => {
                                 this.toggleContent("tutorials");
                             }}
