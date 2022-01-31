@@ -75,7 +75,7 @@ class Header extends Component {
                     <div className="profile__menu">
                         <Link
                             className="profile__menu-item"
-                            to="/users"
+                            to="/users/profile"
                             onClick={this.toggleMenu}
                         >
                             <img
