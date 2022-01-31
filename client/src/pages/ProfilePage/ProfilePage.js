@@ -4,6 +4,7 @@ import { Component } from "react";
 import axios from "axios";
 
 import profileImg from "../../assets/images/preferences.svg";
+import UserHome from "../../components/UserHome";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -12,6 +13,7 @@ class ProfilePage extends Component {
         level: "beginner",
         medium: [],
         isProfileUpdated: false,
+        user: null,
     };
 
     /**
@@ -179,11 +181,21 @@ class ProfilePage extends Component {
         );
     };
 
+    componentDidMount() {
+        axios
+            .get(`${API_URL}/users/${this.props.user.id}`)
+            .then((res) => {
+                console.log(res.data);
+                this.setState({ user: res.data });
+            })
+            .catch((err) => console.log(err));
+    }
+
     render() {
         console.log(this.props.user);
         const { first_name, last_name } = this.props.user;
-        if (this.state.isProfileUpdated) {
-            return <div> Welcome back!</div>;
+        if (this.state.user?.is_profile_complete === 1) {
+            return <UserHome userId={this.props.user.id} />;
         }
         return (
             <div className="profile-page">
