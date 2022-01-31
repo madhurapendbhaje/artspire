@@ -54,19 +54,6 @@ function getUserPhotos(userId) {
         });
 }
 
-function getUserTutorials(userId) {
-    let result = [];
-    knex("user_tutorial")
-        .join("tutorials", "tutorials.id", "user_tutorial.tutorial_id")
-        .where({ user_id: userId })
-        .then((response) => {
-            console.log(response);
-            result = response;
-            return result;
-        })
-        .catch((_err) => result);
-}
-
 // Get User details
 router.get("/:id", (req, res) => {
     let userObj = {};
@@ -92,7 +79,20 @@ router.get("/:id", (req, res) => {
                         });
                 });
         })
-        .catch((_err) => res.status(400).send("User not found"));
+        .catch((_err) => res.status(404).send("User not found"));
+});
+
+// Get user's preferred mediums
+router.get("/:id/mediums", (req, res) => {
+    knex("user_medium")
+        .join("medium", "medium.id", "user_medium.medium_id")
+        .where({ user_id: req.params.id })
+        .then((response) => {
+            return res.send(response);
+        })
+        .catch((_err) =>
+            res.status(404).send("Could not find user's preferred mediums")
+        );
 });
 
 // Update user profile
@@ -102,6 +102,7 @@ router.put("/:id", (req, res) => {
     knex("users")
         .where({ id: req.params.id })
         .update({ proficiency_level: data.level })
+        .then(() => {})
         .catch((_err) => {
             return res.status(500).send("Could not save preferences");
         });
@@ -144,7 +145,4 @@ router.put("/:id", (req, res) => {
     res.send("User preferences saved");
 });
 
-router.get("/", (req, res) => {
-    res.send("Test");
-});
 module.exports = router;

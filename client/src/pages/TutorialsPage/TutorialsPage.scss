@@ -1,0 +1,26 @@
+@use "../../styles/partials/global";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/variables" as *;
+
+.tutorials {
+    padding: $vertical-padding-mobile;
+
+    @include tablet {
+        padding: 1rem $vertical-padding-tablet;
+    }
+
+    @include desktop {
+        padding: 1rem $vertical-padding-desktop;
+    }
+    &__section-title {
+        text-transform: capitalize;
+        color: $primary-text-color;
+    }
+    &__medium-section {
+        @include tablet {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}
