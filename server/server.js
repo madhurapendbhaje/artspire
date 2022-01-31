@@ -98,7 +98,7 @@ passport.use(
                         );
                 } else {
                     // User exists, don't create a new record
-                    return done(null, newUser);
+                    return done(null, user[0]);
                 }
             })
             .catch((err) => {
