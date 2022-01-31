@@ -28,8 +28,8 @@ class UserHome extends Component {
         this.setState({ content: contentType });
     }
 
-    contentRender(contentType) {
-        if (contentType === "images") {
+    contentRender() {
+        if (this.state.content === "images") {
             return (
                 <div className="image-grid">
                     {this.state.user.photos.map((photo) => {
@@ -90,9 +90,7 @@ class UserHome extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="user-home__content">
-                    {this.contentRender(this.state.content)}
-                </div>
+                <div className="user-home__content">{this.contentRender()}</div>
             </div>
         );
     }
