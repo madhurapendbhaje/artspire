@@ -71,11 +71,14 @@
     width: 100%;
     padding: 1rem 0 0 1rem;
     @include tablet {
+        margin: 0 auto;
+        width: 90%;
         display: flex;
         padding: 2rem $vertical-padding-tablet;
     }
 
     @include desktop {
+        width: 80%;
         padding: 2rem $vertical-padding-desktop;
     }
     &__column {
