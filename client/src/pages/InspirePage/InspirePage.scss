@@ -13,6 +13,10 @@
         @include tablet {
             width: 60%;
         }
+
+        @include desktop {
+            width: 40%;
+        }
     }
     &__form-container {
         width: 100%;
@@ -78,7 +82,7 @@
     }
 
     @include desktop {
-        width: 80%;
+        width: 60%;
         padding: 2rem $vertical-padding-desktop;
     }
     &__column {

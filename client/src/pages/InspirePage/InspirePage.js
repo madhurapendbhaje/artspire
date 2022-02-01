@@ -54,7 +54,6 @@ class InspirePage extends Component {
     };
 
     getPhotos = (category, page) => {
-        console.log(page);
         axios
             .get(
                 `${UNSPLASH_API_URL}/search/photos/?query=${category}&client_id=${UNSPLASH_API_KEY}&per_page=6&page=${page}`
