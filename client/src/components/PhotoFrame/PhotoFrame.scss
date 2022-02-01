@@ -26,11 +26,19 @@
     }
 
     &__icon {
+        background-image: url("../../assets/icons/heart-solid.svg");
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-position: center;
+        padding: 0.2rem;
+        background-color: #ffffff;
         position: absolute;
-        background-color: white;
-        padding: 0.25rem;
         width: 1.5rem;
+        height: 1.5rem;
         bottom: 1rem;
         right: 1rem;
+        &--highlight {
+            background-image: url("../../assets/icons/heart-red.svg");
+        }
     }
 }

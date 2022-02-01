@@ -4,7 +4,6 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import heartIcon from "../../assets/icons/heart-solid.svg";
 import brushIcon from "../../assets/icons/paint-brush-solid.svg";
 import Search from "../../components/Search";
 import PhotoFrame from "../../components/PhotoFrame";
@@ -96,8 +95,10 @@ class InspirePage extends Component {
     moreHandler = (event) => {
         event.preventDefault();
         // Increment the page count to search new photos
-        let newPage = this.state.page + 1;
-        this.setState({ page: newPage });
+        // this.setState({ page: this.state.page + 1 });
+        // console.log(this.state.page);
+        console.log(this.state);
+        this.setState({ page: this.state.page + 1 });
         this.getPhotos(this.state.category);
     };
 
@@ -168,6 +169,7 @@ class InspirePage extends Component {
         // if (this.state.photos.length === 0) {
         //     return <div>Finding photos...</div>;
         // }
+        console.log("render");
         let modifiedPhotoArr = [];
         if (this.state.windowSize < 1280) {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 2);
