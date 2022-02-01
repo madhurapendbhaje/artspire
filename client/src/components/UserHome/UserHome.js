@@ -6,8 +6,11 @@ import axios from "axios";
 
 import imageIcon from "../../assets/icons/image.svg";
 import playIcon from "../../assets/icons/youtube.svg";
-import noVideoImg from "../../assets/icons/no-video.svg";
-import noPhotoImg from "../../assets/icons/no-photo.svg";
+import collectionIcon from "../../assets/icons/collection.svg";
+import noVideoImg from "../../assets/images/no-video.svg";
+import noPhotoImg from "../../assets/images/no-photo.svg";
+import noCollectImg from "../../assets/images/no-collection.svg";
+
 import PhotoFrame from "../PhotoFrame";
 import VideoFrame from "../VideoFrame";
 
@@ -100,8 +103,14 @@ class UserHome extends Component {
             linkText = "Tutorials";
             imgClass =
                 "nothing-display__image nothing-display__image--tutorial";
+        } else if (this.state.content === "collection") {
+            arr = this.sortCategories();
+            noImg = noCollectImg;
+            link = "/inspire";
+            linkText = "Inspire";
+            imgClass = "nothing-display__image";
         }
-        if (arr.length === 0) {
+        if (arr.length === 0 || arr === {}) {
             return (
                 <div className="nothing-display">
                     <img src={noImg} className={imgClass} />
@@ -202,6 +211,22 @@ class UserHome extends Component {
                                 className="user-home__menu-icon"
                             />
                             <p className="user-home__menu-label">Tutorials</p>
+                        </div>
+                        <div
+                            className={
+                                this.state.content === "collection"
+                                    ? "user-home__menu-item user-home__menu-item--active"
+                                    : "user-home__menu-item"
+                            }
+                            onClick={() => {
+                                this.toggleContent("collection");
+                            }}
+                        >
+                            <img
+                                src={collectionIcon}
+                                className="user-home__menu-icon"
+                            />
+                            <p className="user-home__menu-label">Collection</p>
                         </div>
                     </div>
                 </div>
