@@ -194,8 +194,6 @@ class ProfilePage extends Component {
     }
 
     render() {
-        console.log("render");
-        console.log(this.state.user);
         const { first_name, last_name } = this.props.user;
         if (this.state.user?.is_profile_complete === 1) {
             return <UserHome userId={this.state.user.id} />;
