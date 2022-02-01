@@ -185,6 +185,12 @@ class InspirePage extends Component {
         } else {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 3);
         }
+        let placeholder = null;
+        if (this.props.location.state) {
+            placeholder = this.props.location.state.category;
+        } else {
+            placeholder = "What do you feel like painting?";
+        }
         return (
             <div className="search-bar">
                 <div className="search-bar__container">
@@ -202,13 +208,7 @@ class InspirePage extends Component {
                         }
                         onSubmit={this.submitHandler}
                     >
-                        <Search
-                            placeholderText={
-                                this.props.location.state.category
-                                    ? this.props.location.state.category
-                                    : "What do you feel like painting?"
-                            }
-                        />
+                        <Search placeholderText={placeholder} />
                         <button type="submit" className="search-bar__button">
                             <img
                                 src={brushIcon}
