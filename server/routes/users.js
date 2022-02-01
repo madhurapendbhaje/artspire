@@ -107,42 +107,72 @@ router.put("/:id", (req, res) => {
             return res.status(500).send("Could not save preferences");
         });
 
-    data.medium.forEach((medium) => {
-        knex("medium")
-            .where({ medium_type: medium })
-            .then((response) => {
-                const mediumId = response[0].id;
-                const userMediumObj = {
-                    id: uuidv4(),
-                    user_id: req.params.id,
-                    medium_id: mediumId,
-                };
-                knex("user_medium")
-                    .insert(userMediumObj)
-                    .then(() => {
-                        knex("users")
-                            .where({ id: req.params.id })
-                            .update({ is_profile_complete: true })
+    knex("user_medium")
+        .del()
+        .where({ user_id: req.params.id })
+        .then((_res) => {
+            data.medium.forEach((medium) => {
+                knex("medium")
+                    .where({ medium_type: medium })
+                    .then((response) => {
+                        const mediumId = response[0].id;
+                        const userMediumObj = {
+                            id: uuidv4(),
+                            user_id: req.params.id,
+                            medium_id: mediumId,
+                        };
+                        knex("user_medium")
+                            .insert(userMediumObj)
+                            .then()
                             .catch((_err) => {
                                 return res
-                                    .status(500)
-                                    .send(
-                                        "Could not save profile preferences."
-                                    );
+                                    .send(500)
+                                    .send("Could not save preferences");
                             });
+                        // const userMediumObj = {
+                        //     id: uuidv4(),
+                        //     user_id: req.params.id,
+                        //     medium_id: mediumId,
+                        // };
+                        // knex("user_medium")
+                        //     .insert(userMediumObj)
+                        //     .then(() => {
+                        //         knex("users")
+                        //             .where({ id: req.params.id })
+                        //             .update({ is_profile_complete: true })
+                        //             .catch((_err) => {
+                        //                 return res
+                        //                     .status(500)
+                        //                     .send(
+                        //                         "Could not save profile preferences."
+                        //                     );
+                        //             });
+                        //     })
+                        //     .catch((_err) => {
+                        //         return res
+                        //             .status(500)
+                        //             .send("Could not save preferences");
+                        //     });
                     })
                     .catch((_err) => {
                         return res
                             .status(500)
                             .send("Could not save preferences");
                     });
-            })
-            .catch((_err) => {
-                return res.status(500).send("Could not save preferences");
             });
-    });
-
-    res.send("User preferences saved");
+        })
+        .catch((_err) => {
+            return res.status(500).send("Could not save preferences");
+        });
+    knex("users")
+        .where({ id: req.params.id })
+        .update({ is_profile_complete: true })
+        .then(() => {
+            res.send("User preferences saved");
+        })
+        .catch((_err) => {
+            return res.status(500).send("Could not save profile preferences.");
+        });
 });
 
 module.exports = router;
