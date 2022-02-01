@@ -96,39 +96,44 @@ router.get("/:id/mediums", (req, res) => {
 });
 
 // Update user profile
-router.put("/:id", (req, res) => {
+router.post("/:id", (req, res) => {
     const data = req.body;
 
     knex("users")
         .where({ id: req.params.id })
         .update({ proficiency_level: data.level })
-        .then(() => {})
-        .catch((_err) => {
-            return res.status(500).send("Could not save preferences");
-        });
-
-    data.medium.forEach((medium) => {
-        knex("medium")
-            .where({ medium_type: medium })
-            .then((response) => {
-                const mediumId = response[0].id;
-                const userMediumObj = {
-                    id: uuidv4(),
-                    user_id: req.params.id,
-                    medium_id: mediumId,
-                };
-                knex("user_medium")
-                    .insert(userMediumObj)
-                    .then(() => {
-                        knex("users")
-                            .where({ id: req.params.id })
-                            .update({ is_profile_complete: true })
+        .then(() => {
+            data.medium.forEach((medium) => {
+                knex("medium")
+                    .where({ medium_type: medium })
+                    .then((response) => {
+                        const mediumId = response[0].id;
+                        const userMediumObj = {
+                            id: uuidv4(),
+                            user_id: req.params.id,
+                            medium_id: mediumId,
+                        };
+                        knex("user_medium")
+                            .insert(userMediumObj)
+                            .then(() => {
+                                knex("users")
+                                    .where({ id: req.params.id })
+                                    .update({ is_profile_complete: true })
+                                    .then(() => {
+                                        return res.send("Preferences saved.");
+                                    })
+                                    .catch((_err) => {
+                                        return res
+                                            .status(500)
+                                            .send(
+                                                "Could not save profile preferences."
+                                            );
+                                    });
+                            })
                             .catch((_err) => {
                                 return res
                                     .status(500)
-                                    .send(
-                                        "Could not save profile preferences."
-                                    );
+                                    .send("Could not save preferences");
                             });
                     })
                     .catch((_err) => {
@@ -136,11 +141,11 @@ router.put("/:id", (req, res) => {
                             .status(500)
                             .send("Could not save preferences");
                     });
-            })
-            .catch((_err) => {
-                return res.status(500).send("Could not save preferences");
             });
-    });
+        })
+        .catch((_err) => {
+            return res.status(500).send("Could not save preferences");
+        });
 });
 
 module.exports = router;
