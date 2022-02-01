@@ -8,14 +8,23 @@
 
     @include tablet {
         padding: 1rem $vertical-padding-tablet;
+        margin: 0 auto;
+        width: 90%;
     }
 
     @include desktop {
         padding: 1rem $vertical-padding-desktop;
+        width: 80%;
     }
+
+    &__section {
+        margin-top: 3rem;
+    }
+
     &__section-title {
         text-transform: capitalize;
         color: $primary-text-color;
+        padding-bottom: 0.5rem;
     }
     &__medium-section {
         @include tablet {
