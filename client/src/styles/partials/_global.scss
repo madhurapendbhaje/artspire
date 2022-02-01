@@ -1,4 +1,5 @@
 @use "../partials/typography";
+@use "../partials/colors" as *;
 
 *,
 *::before,
@@ -7,7 +8,8 @@
 }
 
 body {
-    font-family: "Roboto", "Times New Roman";
+    font-family: "Montserrat", "Times New Roman";
     margin: 0;
     padding: 0;
+    color: $primary-text-color;
 }

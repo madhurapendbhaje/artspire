@@ -1,13 +1,20 @@
 @font-face {
-    font-family: "Roboto";
-    src: url(../../assets/fonts/Roboto-Regular.woff2);
+    font-family: "Montserrat";
+    src: url(../../assets/fonts/Montserrat-Regular.woff2);
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../../assets/fonts/Montserrat-Medium.woff2);
     font-style: normal;
     font-weight: 400;
 }
 
 @font-face {
-    font-family: "Roboto";
-    src: url(../../assets/fonts/Roboto-Bold.woff2);
+    font-family: "Montserrat";
+    src: url(../../assets/fonts/Montserrat-Bold.woff2);
     font-style: normal;
     font-weight: 700;
 }
