@@ -2,7 +2,13 @@ import "./PhotoFrame.scss";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
 
-function PhotoFrame({ url, description, category, favoriteHandler }) {
+function PhotoFrame({
+    url,
+    description,
+    category,
+    contentType,
+    favoriteHandler,
+}) {
     return (
         <div className="photo__container">
             <img src={url} alt={description} className="photo__image" />
@@ -12,7 +18,7 @@ function PhotoFrame({ url, description, category, favoriteHandler }) {
                     alt="Heart Icon"
                     className="photo__icon"
                     onClick={(event) => {
-                        favoriteHandler(event, url, category);
+                        favoriteHandler(event, url, contentType, category);
                     }}
                 />
             </div>

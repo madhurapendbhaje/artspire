@@ -8,28 +8,78 @@ import imageIcon from "../../assets/icons/image.svg";
 import playIcon from "../../assets/icons/youtube.svg";
 import noVideoImg from "../../assets/icons/no-video.svg";
 import noPhotoImg from "../../assets/icons/no-photo.svg";
+import PhotoFrame from "../PhotoFrame";
+import VideoFrame from "../VideoFrame";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 class UserHome extends Component {
     state = {
         user: null,
-        content: "images",
+        content: "photos",
     };
 
-    componentDidMount() {
-        const id = this.props.userId;
+    getUserData(id) {
         axios
             .get(`${API_URL}/users/${id}`)
             .then((response) => {
                 this.setState({ user: response.data });
             })
-            .catch((err) => {});
+            .catch((_err) => {});
+    }
+
+    componentDidMount() {
+        const id = this.props.userId;
+        this.getUserData(id);
     }
 
     toggleContent(contentType) {
         this.setState({ content: contentType });
     }
+
+    sortCategories() {
+        let categories = [];
+        let categoriesData = {};
+        let userPhotos = this.state.user.photos;
+        let userTutorials = this.state.user.tutorials;
+
+        userPhotos.forEach((photo) => {
+            if (!categories.includes(photo.category)) {
+                categories.push(photo.category);
+            }
+        });
+        userTutorials.forEach((tutorial) => {
+            if (!categories.includes(tutorial.category)) {
+                categories.push(tutorial.category);
+            }
+        });
+
+        categories.forEach((category) => {
+            categoriesData[category] = { photos: [], tutorials: [] };
+            categoriesData[category].photos = userPhotos.filter(
+                (photo) => photo.category === category
+            );
+            categoriesData[category].tutorials = userTutorials.filter(
+                (tutorial) => tutorial.category === category
+            );
+        });
+        return categoriesData;
+    }
+
+    favoriteHandler = (event, url, contentType, category) => {
+        event.preventDefault();
+        const obj = {
+            user_id: this.state.user.id,
+            url: url,
+            category: category,
+        };
+        axios
+            .post(`${API_URL}/${contentType}`, obj)
+            .then((_response) => {
+                this.getUserData(this.state.user.id);
+            })
+            .catch((err) => console.log(`Not saved ${err}`));
+    };
 
     contentRender() {
         let arr = [];
@@ -37,7 +87,7 @@ class UserHome extends Component {
         let link = null;
         let linkText = null;
         let imgClass = null;
-        if (this.state.content === "images") {
+        if (this.state.content === "photos") {
             arr = this.state.user.photos;
             noImg = noPhotoImg;
             link = "/inspire";
@@ -64,41 +114,34 @@ class UserHome extends Component {
                     </p>
                 </div>
             );
-        } else {
+        } else if (this.state.content === "photos") {
             return (
-                <div
-                    className={
-                        this.state.content === "images"
-                            ? "grid"
-                            : "grid grid--video"
-                    }
-                >
-                    {arr.map((arrElem) => {
-                        if (this.state.content === "images") {
-                            return (
-                                <img
-                                    src={arrElem.url}
-                                    alt={arrElem.id}
-                                    key={arrElem.id}
-                                    className="grid__image"
-                                />
-                            );
-                        } else {
-                            return (
-                                <div className="grid__video-container">
-                                    <div className="grid__video-frame">
-                                        <iframe
-                                            src={arrElem.url}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                            key={arrElem.id}
-                                            className="grid__video"
-                                        />
-                                    </div>
-                                </div>
-                            );
-                        }
+                <div className="image-grid">
+                    {this.state.user.photos.map((photo) => {
+                        return (
+                            <PhotoFrame
+                                url={photo.url}
+                                description={photo.id}
+                                category={photo.category}
+                                contentType={"photos"}
+                                favoriteHandler={this.favoriteHandler}
+                            />
+                        );
+                    })}
+                </div>
+            );
+        } else if (this.state.content === "tutorials") {
+            return (
+                <div className="video-grid">
+                    {this.state.user.tutorials.map((tutorial) => {
+                        return (
+                            <VideoFrame
+                                videoId={tutorial.id}
+                                url={tutorial.url}
+                                title={tutorial.title}
+                                favoriteHandler={this.favoriteHandler}
+                            />
+                        );
                     })}
                 </div>
             );
@@ -130,12 +173,12 @@ class UserHome extends Component {
                     <div className="user-home__menu">
                         <div
                             className={
-                                this.state.content === "images"
+                                this.state.content === "photos"
                                     ? "user-home__menu-item user-home__menu-item--active"
                                     : "user-home__menu-item"
                             }
                             onClick={() => {
-                                this.toggleContent("images");
+                                this.toggleContent("photos");
                             }}
                         >
                             <img
