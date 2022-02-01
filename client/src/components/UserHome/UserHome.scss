@@ -69,11 +69,10 @@
 .image-grid {
     width: 100%;
     columns: 2;
-    padding: 0 1rem;
+    padding: 0 $vertical-padding-mobile;
 
     @include desktop {
         column-count: 3;
-        column-gap: 1rem;
     }
 }
 .video-grid {

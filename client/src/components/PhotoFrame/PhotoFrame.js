@@ -1,6 +1,7 @@
 import "./PhotoFrame.scss";
 
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
 
