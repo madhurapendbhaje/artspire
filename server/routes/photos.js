@@ -28,9 +28,10 @@ router.post("/", (req, res) => {
                                     .status(201)
                                     .send("Saved to favorites");
                             })
-                            .catch((err) => {
-                                console.log(err);
-                                ("Could not save to favorites");
+                            .catch((_err) => {
+                                return res
+                                    .status(500)
+                                    .send("Could not save to favorites");
                             });
                     })
                     .catch((err) => {
@@ -52,8 +53,16 @@ router.post("/", (req, res) => {
                             .catch((err) => {
                                 return res.status(500).send(err);
                             });
+                    })
+                    .catch((_err) => {
+                        return res
+                            .status(500)
+                            .send("Could not remove from favorites");
                     });
             }
+        })
+        .catch((_err) => {
+            return res.status(500).send("Could not process the photo");
         });
 });
 

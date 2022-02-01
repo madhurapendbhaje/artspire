@@ -5,7 +5,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable("tutorials", (table) => {
         table.uuid("id").primary().defaultTo(knex.raw("(UUID())"));
-        table.string("url").notNullable();
+        table.string("url").notNullable().unique();
         table.string("title").notNullable();
         table.string("category").notNullable();
     });
