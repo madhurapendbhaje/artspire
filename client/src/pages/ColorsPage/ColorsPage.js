@@ -14,6 +14,7 @@ class ColorsPage extends Component {
     state = {
         colors: [],
         windowSize: null,
+        active: false,
     };
 
     /**
@@ -31,12 +32,18 @@ class ColorsPage extends Component {
         }, 100);
     };
 
+    changeColor() {
+        {
+            this.setState({ active: !this.state.active });
+        }
+    }
+
     renderSwatches = () => {
         const { colors } = this.state;
 
         const mobileStyleObject = {
             width: 100 + "%",
-            height: 2 + "rem",
+            height: 4 + "rem",
         };
 
         const tabletStyleObject = {
@@ -76,7 +83,7 @@ class ColorsPage extends Component {
         };
         axios
             .post(`${API_URL}/photos`, photoObj)
-            .then((_response) => console.log("Saved to favorites"))
+            .then((response) => console.log(response))
             .catch((_err) => console.log("Not saved"));
     };
 
@@ -95,14 +102,39 @@ class ColorsPage extends Component {
 
         return (
             <div className="color">
-                <img
-                    src={backIcon}
-                    alt="back icon"
-                    className="color__icon"
-                    onClick={() => {
-                        this.props.history.goBack();
-                    }}
-                />
+                <div className="color__cta">
+                    <img
+                        src={backIcon}
+                        alt="back icon"
+                        className="color__icon"
+                        onClick={() => {
+                            this.props.history.goBack();
+                        }}
+                    />
+                    <div className="color__cta-container">
+                        <div
+                            className={
+                                this.state.active
+                                    ? "color__heart-icon color__heart-icon--highlight"
+                                    : "color__heart-icon"
+                            }
+                            onClick={(event) => {
+                                this.favoriteHandler(event, URL, category);
+                                this.changeColor();
+                            }}
+                        ></div>
+                        <Link
+                            to={{
+                                pathname: `/tutorials/${category}`,
+                                state: { keywords: keywords },
+                            }}
+                            className="color__button"
+                        >
+                            Tutorials
+                        </Link>
+                    </div>
+                </div>
+
                 <div className="color__image-container">
                     <ColorExtractor getColors={this.getColors}>
                         <img src={URL} className="color__image" />
@@ -110,25 +142,6 @@ class ColorsPage extends Component {
                 </div>
                 <div className="color__palette-container">
                     {this.renderSwatches()}
-                </div>
-                <div className="color__cta">
-                    <img
-                        src={heartIcon}
-                        slt="Heart icon"
-                        className="color__icon"
-                        onClick={(event) => {
-                            this.favoriteHandler(event, URL, category);
-                        }}
-                    />
-                    <Link
-                        to={{
-                            pathname: `/tutorials/${category}`,
-                            state: { keywords: keywords },
-                        }}
-                        className="color__button"
-                    >
-                        Tutorials
-                    </Link>
                 </div>
             </div>
         );
