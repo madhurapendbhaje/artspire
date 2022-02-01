@@ -31,6 +31,7 @@ class PhotoFrame extends Component {
                             this.props.favoriteHandler(
                                 event,
                                 this.props.url,
+                                "placeholder",
                                 this.props.contentType,
                                 this.props.category
                             );
