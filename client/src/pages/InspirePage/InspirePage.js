@@ -53,13 +53,18 @@ class InspirePage extends Component {
         }, 100);
     };
 
-    getPhotos = (category) => {
+    getPhotos = (category, page) => {
+        console.log(page);
         axios
             .get(
-                `${UNSPLASH_API_URL}/search/photos/?query=${category}&client_id=${UNSPLASH_API_KEY}&per_page=6&page=${this.state.page}`
+                `${UNSPLASH_API_URL}/search/photos/?query=${category}&client_id=${UNSPLASH_API_KEY}&per_page=6&page=${page}`
             )
             .then((response) => {
-                this.setState({ photos: response.data.results });
+                this.setState({
+                    photos: response.data.results,
+                    category: category,
+                    page: page,
+                });
             })
             .catch((_err) => {
                 this.setState({ error: true });
@@ -89,17 +94,15 @@ class InspirePage extends Component {
             return;
         }
         this.setState({ category: input });
-        this.getPhotos(input);
+        this.getPhotos(input, this.state.page);
     };
 
     moreHandler = (event) => {
         event.preventDefault();
         // Increment the page count to search new photos
-        // this.setState({ page: this.state.page + 1 });
-        // console.log(this.state.page);
         console.log(this.state);
-        this.setState({ page: this.state.page + 1 });
-        this.getPhotos(this.state.category);
+        let page = this.state.page + 1;
+        this.getPhotos(this.state.category, page);
     };
 
     photoGrid(photoArrList) {
@@ -128,6 +131,7 @@ class InspirePage extends Component {
                                                     category:
                                                         this.state.category,
                                                     keywords: tags,
+                                                    page: this.state.page,
                                                 },
                                             }}
                                             key={photo.id}
@@ -158,6 +162,12 @@ class InspirePage extends Component {
     }
 
     componentDidMount() {
+        if (this.props.location.state) {
+            this.getPhotos(
+                this.props.location.state.category,
+                this.props.location.state.page
+            );
+        }
         this.checkWindowSize();
     }
 
@@ -169,7 +179,6 @@ class InspirePage extends Component {
         // if (this.state.photos.length === 0) {
         //     return <div>Finding photos...</div>;
         // }
-        console.log("render");
         let modifiedPhotoArr = [];
         if (this.state.windowSize < 1280) {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 2);
@@ -193,7 +202,13 @@ class InspirePage extends Component {
                         }
                         onSubmit={this.submitHandler}
                     >
-                        <Search placeholderText="What do you feel like painting?" />
+                        <Search
+                            placeholderText={
+                                this.props.location.state.category
+                                    ? this.props.location.state.category
+                                    : "What do you feel like painting?"
+                            }
+                        />
                         <button type="submit" className="search-bar__button">
                             <img
                                 src={brushIcon}

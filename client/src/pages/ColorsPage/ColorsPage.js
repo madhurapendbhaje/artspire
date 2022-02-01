@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { ColorExtractor } from "react-color-extractor";
 import axios from "axios";
 
-import heartIcon from "../../assets/icons/heart-solid.svg";
 import backIcon from "../../assets/icons/angle-left-solid.svg";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -99,18 +98,27 @@ class ColorsPage extends Component {
         const URL = this.props.location.state?.url;
         const category = this.props.location.state.category;
         const keywords = this.props.location.state.keywords;
+        const page = this.props.location.state.page;
 
+        console.log(page);
         return (
             <div className="color">
                 <div className="color__cta">
-                    <img
-                        src={backIcon}
-                        alt="back icon"
-                        className="color__icon"
-                        onClick={() => {
-                            this.props.history.goBack();
+                    <Link
+                        to={{
+                            pathname: "/inspire",
+                            state: {
+                                category: category,
+                                page: page,
+                            },
                         }}
-                    />
+                    >
+                        <img
+                            src={backIcon}
+                            alt="back icon"
+                            className="color__icon"
+                        />
+                    </Link>
                     <div className="color__cta-container">
                         <div
                             className={
