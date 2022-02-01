@@ -45,7 +45,6 @@ class ProfilePage extends Component {
         axios
             .get(`${API_URL}/users/${this.props.user.id}`)
             .then((res) => {
-                console.log("set state");
                 this.setState({ user: res.data });
             })
             .catch((err) => console.log(err));
@@ -64,7 +63,7 @@ class ProfilePage extends Component {
             medium: this.state.medium,
         };
         axios
-            .put(`${API_URL}/users/${userId}`, userPref)
+            .post(`${API_URL}/users/${userId}`, userPref)
             .then((_response) => {
                 this.getUserDetails();
             })

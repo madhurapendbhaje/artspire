@@ -102,38 +102,33 @@ router.post("/:id", (req, res) => {
     knex("users")
         .where({ id: req.params.id })
         .update({ proficiency_level: data.level })
-        .then(() => {
-            data.medium.forEach((medium) => {
-                knex("medium")
-                    .where({ medium_type: medium })
-                    .then((response) => {
-                        const mediumId = response[0].id;
-                        const userMediumObj = {
-                            id: uuidv4(),
-                            user_id: req.params.id,
-                            medium_id: mediumId,
-                        };
-                        knex("user_medium")
-                            .insert(userMediumObj)
-                            .then(() => {
-                                knex("users")
-                                    .where({ id: req.params.id })
-                                    .update({ is_profile_complete: true })
-                                    .then(() => {
-                                        return res.send("Preferences saved.");
-                                    })
-                                    .catch((_err) => {
-                                        return res
-                                            .status(500)
-                                            .send(
-                                                "Could not save profile preferences."
-                                            );
-                                    });
-                            })
+        .then(() => {})
+        .catch((_err) => {
+            return res.status(500).send("Could not save preferences");
+        });
+
+    data.medium.forEach((medium) => {
+        knex("medium")
+            .where({ medium_type: medium })
+            .then((response) => {
+                const mediumId = response[0].id;
+                const userMediumObj = {
+                    id: uuidv4(),
+                    user_id: req.params.id,
+                    medium_id: mediumId,
+                };
+                knex("user_medium")
+                    .insert(userMediumObj)
+                    .then(() => {
+                        knex("users")
+                            .where({ id: req.params.id })
+                            .update({ is_profile_complete: true })
                             .catch((_err) => {
                                 return res
                                     .status(500)
-                                    .send("Could not save preferences");
+                                    .send(
+                                        "Could not save profile preferences."
+                                    );
                             });
                     })
                     .catch((_err) => {
@@ -141,11 +136,13 @@ router.post("/:id", (req, res) => {
                             .status(500)
                             .send("Could not save preferences");
                     });
+            })
+            .catch((_err) => {
+                return res.status(500).send("Could not save preferences");
             });
-        })
-        .catch((_err) => {
-            return res.status(500).send("Could not save preferences");
-        });
+    });
+
+    res.send("User preferences saved");
 });
 
 module.exports = router;
