@@ -2,7 +2,14 @@ import "./VideoFrame.scss";
 
 import heartIcon from "../../assets/icons/heart-solid.svg";
 
-function VideoFrame({ videoId, url, title, favoriteHandler }) {
+function VideoFrame({
+    videoId,
+    url,
+    title,
+    category,
+    contentType,
+    favoriteHandler,
+}) {
     return (
         <div className="video__container" key={videoId}>
             <div className="video__frame">
@@ -21,7 +28,7 @@ function VideoFrame({ videoId, url, title, favoriteHandler }) {
                     alt="heart icon"
                     className="video__caption-icon"
                     onClick={(event) => {
-                        favoriteHandler(event, url);
+                        favoriteHandler(event, url, contentType, category);
                     }}
                 />
             </div>

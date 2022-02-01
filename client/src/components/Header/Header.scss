@@ -8,6 +8,7 @@
     padding: 1rem $vertical-padding-mobile;
     flex-direction: column;
     position: relative;
+    // background-color: #eae6ff;
 
     @include tablet {
         flex-direction: row;
@@ -126,6 +127,7 @@
         border-radius: 0.25rem;
         right: $vertical-padding-mobile;
         z-index: 100;
+        background-color: #ffffff;
 
         @include tablet {
             right: $vertical-padding-tablet;

@@ -149,6 +149,8 @@ class UserHome extends Component {
                                 videoId={tutorial.id}
                                 url={tutorial.url}
                                 title={tutorial.title}
+                                category={tutorial.category}
+                                contentType={"tutorials"}
                                 favoriteHandler={this.favoriteHandler}
                                 key={tutorial.id}
                             />

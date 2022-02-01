@@ -71,8 +71,13 @@
     columns: 2;
     padding: 0 $vertical-padding-mobile;
 
+    @include tablet {
+        padding-right: $vertical-padding-tablet;
+    }
+
     @include desktop {
         column-count: 3;
+        padding-right: vertical-padding-desktop;
     }
 }
 .video-grid {
