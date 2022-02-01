@@ -1,7 +1,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
-.video-grid {
+.tutorials-grid {
     width: 100%;
     padding: $vertical-padding-mobile;
 
@@ -25,16 +25,13 @@
 
     &__container {
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
 
         @include tablet {
-            display: 80%;
+            display: flex;
+            flex-wrap: wrap;
         }
 
         @include desktop {
-            width: 70%;
             margin: 0 auto;
         }
     }

@@ -1,9 +1,6 @@
 import "./PhotoFrame.scss";
 
 import { Component } from "react";
-import { Link } from "react-router-dom";
-
-import heartIcon from "../../assets/icons/heart-solid.svg";
 
 class PhotoFrame extends Component {
     state = {
@@ -25,8 +22,6 @@ class PhotoFrame extends Component {
                 />
                 <div className="photo-gallery__image-overlay">
                     <div
-                        src={heartIcon}
-                        alt="Heart Icon"
                         className={
                             this.state.active
                                 ? "photo__icon photo__icon--highlight"

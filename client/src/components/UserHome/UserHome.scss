@@ -81,9 +81,16 @@
     }
 }
 .video-grid {
+    padding: 0 $vertical-padding-mobile;
+
     @include tablet {
         display: flex;
         flex-wrap: wrap;
+        padding-right: $vertical-padding-tablet;
+    }
+
+    @include desktop {
+        padding-right: $vertical-padding-desktop;
     }
 }
 

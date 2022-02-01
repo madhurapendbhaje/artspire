@@ -69,13 +69,24 @@ class UserHome extends Component {
         return categoriesData;
     }
 
-    favoriteHandler = (event, url, contentType, category) => {
+    favoriteHandler = (event, url, title, contentType, category) => {
         event.preventDefault();
-        const obj = {
-            user_id: this.state.user.id,
-            url: url,
-            category: category,
-        };
+        let obj = null;
+        if (contentType === "tutorials") {
+            obj = {
+                user_id: this.state.user.id,
+                url: url,
+                title: title,
+                category: category,
+            };
+        } else {
+            obj = {
+                user_id: this.state.user.id,
+                url: url,
+                category: category,
+            };
+        }
+
         axios
             .post(`${API_URL}/${contentType}`, obj)
             .then((_response) => {

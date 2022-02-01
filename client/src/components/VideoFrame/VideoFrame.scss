@@ -2,16 +2,17 @@
 
 .video {
     &__container {
-        padding: 1rem 1rem 2rem;
-        margin: 1rem 1rem 1rem 0;
+        padding: 1rem 1.5rem 2rem;
+        margin: 0 1.5rem 1rem 0;
         box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        border: 0.25rem;
         @include tablet {
-            width: 48%;
+            width: 45%;
             max-width: 28rem;
         }
 
         @include desktop {
-            width: 32%;
+            width: 30%;
             max-width: 30rem;
         }
     }
@@ -38,14 +39,22 @@
         margin-top: 1rem;
         display: flex;
         justify-content: space-between;
-        align-items: center;
     }
 
     &__caption {
         margin: 0;
+        width: 80%;
     }
     &__caption-icon {
+        background-image: url("../../assets/icons/heart-solid.svg");
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-position: center;
         width: 1.2rem;
         height: 1.2rem;
+
+        &--highlight {
+            background-image: url("../../assets/icons/heart-red.svg");
+        }
     }
 }
