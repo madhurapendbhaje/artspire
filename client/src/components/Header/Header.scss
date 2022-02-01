@@ -6,7 +6,9 @@
     width: 100%;
     display: flex;
     padding: 1rem $vertical-padding-mobile;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     // background-color: #eae6ff;
 
@@ -22,8 +24,6 @@
     }
 
     &__logo-link {
-        margin: 0 auto;
-
         @include tablet {
             margin: 0;
             width: 20%;
@@ -41,9 +41,11 @@
 
     &__navigation {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
-        width: 60%;
+
+        @include mobile {
+            display: none;
+        }
 
         &-login {
             padding: 0.5rem 1.5rem;
@@ -94,6 +96,25 @@
                 }
             }
         }
+    }
+
+    &__hamburger {
+        display: none;
+
+        @include mobile {
+            display: block;
+            cursor: pointer;
+        }
+    }
+
+    &__bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #101010;
     }
 }
 
@@ -151,6 +172,32 @@
         &-text {
             padding-left: 1rem;
             color: $primary-text-color;
+        }
+    }
+}
+
+.hamburger {
+    &__navigation {
+        background-color: #ffffff;
+        position: absolute;
+        top: 6rem;
+        right: 0;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+
+        @include tablet {
+            display: none;
+        }
+
+        &-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: $primary-text-color;
+
+            &:hover {
+                color: $primary-cta-color;
+            }
         }
     }
 }

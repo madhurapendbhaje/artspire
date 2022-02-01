@@ -15,6 +15,7 @@ class Header extends Component {
         isAuthenticated: false,
         user: null,
         showDropdown: false,
+        showHamburger: false,
     };
 
     componentDidMount() {
@@ -34,7 +35,19 @@ class Header extends Component {
                     isAuthenticated: false,
                 });
             });
+
+        document.addEventListener("mousedown", this.handleClickOutside);
     }
+
+    componentWillUnmount() {
+        document.removeEventListener("mousedown", this.handleClickOutside);
+    }
+
+    handleClickOutside = (event) => {
+        this.setState({
+            showHamburgerMenu: false,
+        });
+    };
 
     signOut = () => {
         // Change location to /logout server route while passing it
@@ -48,6 +61,43 @@ class Header extends Component {
             showDropdown: !prevState.showDropdown,
         }));
     };
+
+    toggleHamburger = () => {
+        this.setState((prevState) => ({
+            showHamburger: !prevState.showHamburger,
+        }));
+    };
+
+    hamburgerMenu() {
+        return (
+            <nav className="hamburger__navigation">
+                <NavLink
+                    to="/users/profile"
+                    className="hamburger__navigation-link"
+                    activeClassName="hamburger__navigation-link"
+                    onClick={this.toggleHamburger}
+                >
+                    My Profile
+                </NavLink>
+                <NavLink
+                    to="/inspire"
+                    className="hamburger__navigation-link"
+                    activeClassName="hamburger__navigation-link"
+                    onClick={this.toggleHamburger}
+                >
+                    Inspire Me
+                </NavLink>
+                <NavLink
+                    to="/tutorials"
+                    className="hamburger__navigation-link"
+                    activeClassName="hamburger__navigation-link"
+                    onClick={this.toggleHamburger}
+                >
+                    Tutorials
+                </NavLink>
+            </nav>
+        );
+    }
 
     dropdownMenu() {
         return (
@@ -111,23 +161,32 @@ class Header extends Component {
                     <NavLink to="/" className="header__logo-link">
                         <img src={logo} alt="Logo" className="header__logo" />
                     </NavLink>
+                    {this.state.showHamburger && this.hamburgerMenu()}
                     <nav className="header__navigation">
                         <NavLink
                             to="/inspire"
                             className="header__navigation-link"
-                            activeClassName="header__navigation-link--active"
+                            activeClassName="header__navigation-link"
                         >
                             Inspire Me
                         </NavLink>
                         <NavLink
                             to="/tutorials"
                             className="header__navigation-link"
-                            activeClassName="header__navigation-link--active"
+                            activeClassName="header__navigation-link"
                         >
                             Tutorials
                         </NavLink>
                         {this.dropdownMenu()}
                     </nav>
+                    <div
+                        className="header__hamburger"
+                        onClick={this.toggleHamburger}
+                    >
+                        <span className="header__bar"></span>
+                        <span className="header__bar"></span>
+                        <span className="header__bar"></span>
+                    </div>
                 </header>
             );
         } else {
