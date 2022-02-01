@@ -3,11 +3,12 @@
 @use "../../styles/partials/colors" as *;
 @use "../../styles/partials/variables" as *;
 
-.search {
+.search-bar {
+    padding: $vertical-padding-mobile;
     &__container {
         margin: 0 auto;
-        padding: 0 $vertical-padding-mobile;
         width: 100%;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
 
         @include tablet {
             width: 60%;
@@ -18,7 +19,6 @@
         height: 2.5rem;
         display: flex;
         border-radius: 0.25rem;
-        box-shadow: 0 6px 8px -8px gray;
 
         &:focus-within {
             border: 0.0625rem solid $primary-cta-color;

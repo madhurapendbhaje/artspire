@@ -177,39 +177,39 @@ class InspirePage extends Component {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 3);
         }
         return (
-            <div className="search">
-                <div className="search__container">
+            <div className="search-bar">
+                <div className="search-bar__container">
                     {this.state.validationError ? (
-                        <span className="search__error-message">
+                        <span className="search-bar__error-message">
                             This field is required
                         </span>
                     ) : null}
                     <form
                         className={
-                            "search__form-container" +
+                            "search-bar__form-container" +
                             (this.state.validationError
-                                ? " search__form-container--error"
+                                ? " search-bar__form-container--error"
                                 : "")
                         }
                         onSubmit={this.submitHandler}
                     >
                         <Search placeholderText="What do you feel like painting?" />
-                        <button type="submit" className="search__button">
+                        <button type="submit" className="search-bar__button">
                             <img
                                 src={brushIcon}
                                 alt="Paint brush icon"
-                                className="search__icon"
+                                className="search-bar__icon"
                             />
                         </button>
                     </form>
                 </div>
                 {this.photoGrid(modifiedPhotoArr)}
                 {this.state.photos.length ? (
-                    <span className="search__show-more-container">
+                    <span className="search-bar__show-more-container">
                         {" "}
                         Not inspired yet?
                         <button
-                            className="search__show-more"
+                            className="search-bar__show-more"
                             onClick={this.moreHandler}
                         >
                             Show more
