@@ -1,0 +1,36 @@
+@use "../../styles/partials/global";
+@use "../../styles/partials/mixins" as *;
+
+.photo {
+    &__container {
+        padding-bottom: 1rem;
+        height: 100%;
+        position: relative;
+        transition: 0.5s ease;
+
+        @include tablet {
+            padding: 0;
+        }
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        display: block;
+        opacity: 1;
+        border-radius: 4px;
+    }
+
+    &__icon {
+        position: absolute;
+        background-color: white;
+        padding: 0.25rem;
+        width: 1.5rem;
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
