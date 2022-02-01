@@ -72,9 +72,12 @@
     padding: 1rem 0 0 1rem;
     @include tablet {
         display: flex;
-        padding: 1rem $vertical-padding-tablet;
+        padding: 2rem $vertical-padding-tablet;
     }
 
+    @include desktop {
+        padding: 2rem $vertical-padding-desktop;
+    }
     &__column {
         padding-right: 1rem;
         @include tablet {
