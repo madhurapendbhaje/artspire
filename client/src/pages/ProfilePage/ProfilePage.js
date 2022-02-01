@@ -63,7 +63,7 @@ class ProfilePage extends Component {
             medium: this.state.medium,
         };
         axios
-            .post(`${API_URL}/users/${userId}`, userPref)
+            .put(`${API_URL}/users/${userId}`, userPref)
             .then((_response) => {
                 this.getUserDetails();
             })

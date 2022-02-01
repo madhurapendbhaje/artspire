@@ -96,7 +96,7 @@ router.get("/:id/mediums", (req, res) => {
 });
 
 // Update user profile
-router.post("/:id", (req, res) => {
+router.put("/:id", (req, res) => {
     const data = req.body;
 
     knex("users")
