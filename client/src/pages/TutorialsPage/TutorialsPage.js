@@ -25,7 +25,7 @@ class TutorialsPage extends Component {
         };
         axios
             .post(`${API_URL}/tutorials`, tutorialObj)
-            .then((_response) => console.log("Saved to favorites"))
+            .then((response) => console.log(response))
             .catch((err) => {
                 console.log("Not saved");
                 console.log(err);
@@ -36,7 +36,6 @@ class TutorialsPage extends Component {
         axios
             .get(`${API_URL}/users/${this.props.user.id}/mediums`)
             .then((res) => {
-                // this.setState({ mediums: response.data });
                 res.data.forEach((medium) => {
                     axios
                         .get(
@@ -64,16 +63,16 @@ class TutorialsPage extends Component {
         }
         return (
             <div className="tutorials">
-                <h2>Recommended for you</h2>
+                <h1>Recommended for you</h1>
                 {this.state.mediums.map((medium) => {
                     return (
                         <div
                             key={medium.medium_type}
                             className="tutorials__section"
                         >
-                            <h3 className="tutorials__section-title">
+                            <h2 className="tutorials__section-title">
                                 {medium.medium_type}
-                            </h3>
+                            </h2>
                             <div className="tutorials__medium-section">
                                 {this.state[medium.medium_type]?.items.map(
                                     (video) => {
