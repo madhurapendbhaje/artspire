@@ -87,7 +87,7 @@ class Header extends Component {
                                 My Profile
                             </p>
                         </Link>
-                        <Link
+                        <div
                             className="profile__menu-item"
                             onClick={this.signOut}
                         >
@@ -97,7 +97,7 @@ class Header extends Component {
                                 className="profile__menu-item-icon"
                             />
                             <p className="profile__menu-item-text">Logout</p>
-                        </Link>
+                        </div>
                     </div>
                 )}
             </div>

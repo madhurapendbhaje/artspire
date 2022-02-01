@@ -134,6 +134,7 @@ class UserHome extends Component {
                                 category={photo.category}
                                 contentType={"photos"}
                                 favoriteHandler={this.favoriteHandler}
+                                key={photo.id}
                             />
                         );
                     })}
@@ -149,6 +150,7 @@ class UserHome extends Component {
                                 url={tutorial.url}
                                 title={tutorial.title}
                                 favoriteHandler={this.favoriteHandler}
+                                key={tutorial.id}
                             />
                         );
                     })}
