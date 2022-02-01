@@ -7,6 +7,7 @@ import axios from "axios";
 import heartIcon from "../../assets/icons/heart-solid.svg";
 import brushIcon from "../../assets/icons/paint-brush-solid.svg";
 import Search from "../../components/Search";
+import PhotoFrame from "../../components/PhotoFrame";
 
 const UNSPLASH_API_URL = process.env.REACT_APP_UNSPLASH_API_URL;
 const UNSPLASH_API_KEY = process.env.REACT_APP_UNSPLASH_API_KEY;
@@ -54,7 +55,6 @@ class InspirePage extends Component {
     };
 
     getPhotos = (category) => {
-        console.log("api call");
         axios
             .get(
                 `${UNSPLASH_API_URL}/search/photos/?query=${category}&client_id=${UNSPLASH_API_KEY}&per_page=6&page=${this.state.page}`
@@ -62,8 +62,7 @@ class InspirePage extends Component {
             .then((response) => {
                 this.setState({ photos: response.data.results });
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((_err) => {
                 this.setState({ error: true });
             });
     };
@@ -77,8 +76,10 @@ class InspirePage extends Component {
         };
         axios
             .post(`${API_URL}/photos`, photoObj)
-            .then((response) => console.log(response.data))
-            .catch((err) => console.log(`Not saved ${err}`));
+            .then((_response) => {})
+            .catch((_err) => {
+                this.setState({ error: true });
+            });
     };
 
     submitHandler = (event) => {
@@ -131,31 +132,19 @@ class InspirePage extends Component {
                                             key={photo.id}
                                             className="photo-gallery__image-link"
                                         >
-                                            <div className="photo-gallery__image-container">
-                                                <img
-                                                    src={photo.urls.regular}
-                                                    alt={
-                                                        photo.description
-                                                            ? photo.description
-                                                            : photo.alt_description
-                                                    }
-                                                    className="photo-gallery__image"
-                                                />
-                                                <div className="photo-gallery__image-overlay">
-                                                    <img
-                                                        src={heartIcon}
-                                                        alt="Heart Icon"
-                                                        className="photo-gallery__icon"
-                                                        onClick={(event) =>
-                                                            this.favoriteHandler(
-                                                                event,
-                                                                photo.urls
-                                                                    .regular
-                                                            )
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
+                                            <PhotoFrame
+                                                url={photo.urls.regular}
+                                                description={
+                                                    photo.description
+                                                        ? photo.description
+                                                        : photo.alt_description
+                                                }
+                                                category={this.state.category}
+                                                contentType="photo"
+                                                favoriteHandler={
+                                                    this.favoriteHandler
+                                                }
+                                            />
                                         </Link>
                                     );
                                 })}
