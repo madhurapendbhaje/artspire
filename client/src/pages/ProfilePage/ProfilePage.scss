@@ -39,6 +39,10 @@
         border-radius: 0.25rem;
         color: $secondary-text-color;
         cursor: pointer;
+
+        &:hover {
+            background-color: $cta-hover-color;
+        }
     }
 
     &__artwork-container {

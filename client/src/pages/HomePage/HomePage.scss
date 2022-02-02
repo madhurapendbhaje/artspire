@@ -65,6 +65,10 @@
             font-size: 1rem;
             text-align: center;
 
+            &:hover {
+                background-color: $cta-hover-color;
+            }
+
             @include tablet {
                 width: fit-content;
             }

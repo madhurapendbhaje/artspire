@@ -55,6 +55,10 @@
             background-color: $primary-cta-color;
             color: $secondary-text-color;
             border-radius: $border-radius;
+
+            &:hover {
+                background-color: $cta-hover-color;
+            }
         }
         &-logout {
             padding: 0.5rem 1.5rem;

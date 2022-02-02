@@ -13,4 +13,8 @@
     border: none;
     outline: none;
     cursor: pointer;
+
+    &:hover {
+        background-color: $cta-hover-color;
+    }
 }

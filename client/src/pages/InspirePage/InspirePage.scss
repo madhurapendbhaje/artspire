@@ -79,6 +79,11 @@
         border: none;
         outline: none;
         cursor: pointer;
+        border-radius: 0.25rem;
+
+        &:hover {
+            background-color: $cta-hover-color;
+        }
     }
 }
 
