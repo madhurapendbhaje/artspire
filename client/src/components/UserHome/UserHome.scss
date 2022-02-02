@@ -105,21 +105,26 @@
 .image-grid {
     width: 100%;
     columns: 2;
-    padding: 0 $vertical-padding-mobile;
+    padding: $vertical-padding-mobile;
 
     @include tablet {
+        width: 90%;
+        padding-top: 0;
         padding-right: $vertical-padding-tablet;
     }
 
     @include desktop {
+        width: 80%;
         column-count: 3;
         padding-right: vertical-padding-desktop;
     }
 }
 .video-grid {
-    padding: 0 $vertical-padding-mobile;
+    width: 100%;
+    padding: $vertical-padding-mobile;
 
     @include tablet {
+        padding-top: 0;
         display: flex;
         flex-wrap: wrap;
         padding-right: $vertical-padding-tablet;
