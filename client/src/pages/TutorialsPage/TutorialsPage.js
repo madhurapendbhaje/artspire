@@ -62,6 +62,9 @@ class TutorialsPage extends Component {
         if (this.state.error) {
             return <Error />;
         }
+        if (!this.state.mediums) {
+            return <div className="tutorials">Loading...</div>;
+        }
         return (
             <div className="tutorials">
                 <h1>Recommended for you</h1>
