@@ -111,6 +111,11 @@
             display: block;
             cursor: pointer;
         }
+
+        &-close {
+            width: 2rem;
+            height: 2rem;
+        }
     }
 
     &__bar {

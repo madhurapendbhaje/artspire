@@ -9,6 +9,7 @@ import userLogo from "../../assets/icons/user-solid.svg";
 import logoutIcon from "../../assets/icons/logout.svg";
 import upArrow from "../../assets/icons/angle-up-solid.svg";
 import downArrow from "../../assets/icons/angle-down-solid.svg";
+import closeIcon from "../../assets/icons/close.svg";
 
 class Header extends Component {
     state = {
@@ -190,14 +191,22 @@ class Header extends Component {
                         </NavLink>
                         {this.dropdownMenu()}
                     </nav>
-                    <div
-                        className="header__hamburger"
-                        onClick={this.toggleHamburger}
-                    >
-                        <span className="header__bar"></span>
-                        <span className="header__bar"></span>
-                        <span className="header__bar"></span>
-                    </div>
+                    {this.state.showHamburger ? (
+                        <img
+                            src={closeIcon}
+                            className="header__hamburger-close"
+                            onClick={this.toggleHamburger}
+                        />
+                    ) : (
+                        <div
+                            className="header__hamburger"
+                            onClick={this.toggleHamburger}
+                        >
+                            <span className="header__bar"></span>
+                            <span className="header__bar"></span>
+                            <span className="header__bar"></span>
+                        </div>
+                    )}
                 </header>
             );
         } else {
