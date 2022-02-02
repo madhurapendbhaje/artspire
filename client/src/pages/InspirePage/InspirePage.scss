@@ -6,12 +6,14 @@
 .search-bar {
     width: 100%;
     padding: $vertical-padding-mobile;
-    position: absolute;
-    top: 40%;
 
-    &--move {
-        top: 10%;
-        transition: 1s ease;
+    @include tablet {
+        position: absolute;
+        top: 40%;
+        &--move {
+            top: 10%;
+            transition: 1s ease;
+        }
     }
 
     &__container {
