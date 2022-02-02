@@ -95,6 +95,17 @@ class Header extends Component {
                 >
                     Tutorials
                 </NavLink>
+                <div
+                    className="hamburger__navigation-link hamburger__navigation-link--logout"
+                    onClick={this.signOut}
+                >
+                    <img
+                        src={logoutIcon}
+                        alt="Logout icon"
+                        className="hamburger__navigation-icon"
+                    />
+                    Logout
+                </div>
             </nav>
         );
     }
@@ -195,7 +206,7 @@ class Header extends Component {
                     <NavLink to="/" className="header__logo-link">
                         <img src={logo} alt="Logo" className="header__logo" />
                     </NavLink>
-                    <nav className="header__navigation">
+                    <nav className="header__navigation header__navigation--login">
                         <NavLink
                             to="/users/login"
                             className="header__navigation-login"
