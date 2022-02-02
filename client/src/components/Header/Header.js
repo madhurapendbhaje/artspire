@@ -1,10 +1,10 @@
 import "./Header.scss";
 
-import logo from "../../assets/logo/artspire.svg";
 import { NavLink, Link } from "react-router-dom";
 import { Component } from "react";
 import axios from "axios";
 
+import logo from "../../assets/logo/logo-new.png";
 import userLogo from "../../assets/icons/user-solid.svg";
 import logoutIcon from "../../assets/icons/logout.svg";
 import upArrow from "../../assets/icons/angle-up-solid.svg";
