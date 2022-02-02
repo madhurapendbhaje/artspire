@@ -73,6 +73,7 @@
 
     &__banner {
         margin: 4rem 0;
+        height: 5rem;
         @include tablet {
             margin: 8rem auto;
             width: 70%;
