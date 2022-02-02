@@ -1,0 +1,17 @@
+@use "../../styles/partials/mixins" as *;
+
+.error {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: 4rem auto;
+
+    &__image {
+        width: 80%;
+        margin: 0 auto;
+
+        @include tablet {
+            width: 50%;
+        }
+    }
+}

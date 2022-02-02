@@ -3,6 +3,7 @@ import "./TutorialsPage.scss";
 import { Component } from "react";
 import axios from "axios";
 
+import Error from "../../components/Error";
 import VideoFrame from "../../components/VideoFrame/VideoFrame";
 
 const API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -58,13 +59,13 @@ class TutorialsPage extends Component {
     }
 
     render() {
-        if (!this.state.mediums) {
-            return <div>Loading..</div>;
+        if (this.state.error) {
+            return <Error />;
         }
         return (
             <div className="tutorials">
                 <h1>Recommended for you</h1>
-                {this.state.mediums.map((medium) => {
+                {this.state.mediums?.map((medium) => {
                     return (
                         <div
                             key={medium.medium_type}
