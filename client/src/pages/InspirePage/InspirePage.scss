@@ -4,11 +4,19 @@
 @use "../../styles/partials/variables" as *;
 
 .search-bar {
+    width: 100%;
     padding: $vertical-padding-mobile;
+    position: absolute;
+    top: 40%;
+
+    &--move {
+        top: 10%;
+        transition: 0.5s ease;
+    }
+
     &__container {
         margin: 0 auto;
         width: 100%;
-        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
 
         @include tablet {
             width: 60%;
@@ -23,6 +31,7 @@
         height: 2.5rem;
         display: flex;
         border-radius: 0.25rem;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
 
         &:focus-within {
             border: 0.0625rem solid $primary-cta-color;
@@ -75,14 +84,14 @@
     width: 100%;
     padding: 1rem 0 0 1rem;
     @include tablet {
-        margin: 0 auto;
         width: 90%;
+        margin: 0 auto;
         display: flex;
         padding: 2rem $vertical-padding-tablet;
     }
 
     @include desktop {
-        width: 80%;
+        width: 70%;
         padding: 2rem $vertical-padding-desktop;
     }
     &__column {

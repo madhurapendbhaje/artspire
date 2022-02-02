@@ -20,6 +20,7 @@ class InspirePage extends Component {
         validationError: false,
         category: null,
         page: 1,
+        moveSearch: false,
     };
 
     // https://stackoverflow.com/questions/8188548/splitting-a-js-array-into-n-arrays
@@ -92,7 +93,7 @@ class InspirePage extends Component {
             this.setState({ validationError: true });
             return;
         }
-        this.setState({ category: input });
+        this.setState({ category: input, moveSearch: true });
         this.getPhotos(input, this.state.page);
     };
 
@@ -191,7 +192,13 @@ class InspirePage extends Component {
             placeholder = "What do you feel like painting?";
         }
         return (
-            <div className="search-bar">
+            <div
+                className={
+                    this.state.moveSearch
+                        ? "search-bar search-bar--move"
+                        : "search-bar"
+                }
+            >
                 <div className="search-bar__container">
                     {this.state.validationError ? (
                         <span className="search-bar__error-message">
