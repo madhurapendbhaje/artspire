@@ -227,7 +227,7 @@ class UserHome extends Component {
                             />
                             <p className="user-home__menu-label">Tutorials</p>
                         </div>
-                        <div
+                        {/* <div
                             className={
                                 this.state.content === "collection"
                                     ? "user-home__menu-item user-home__menu-item--active"
@@ -242,7 +242,7 @@ class UserHome extends Component {
                                 className="user-home__menu-icon"
                             />
                             <p className="user-home__menu-label">Collection</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="user-home__content">{this.contentRender()}</div>
