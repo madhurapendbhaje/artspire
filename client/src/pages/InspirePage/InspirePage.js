@@ -163,6 +163,7 @@ class InspirePage extends Component {
 
     componentDidMount() {
         if (this.props.location.state) {
+            this.setState({ moveSearch: true });
             this.getPhotos(
                 this.props.location.state.category,
                 this.props.location.state.page
