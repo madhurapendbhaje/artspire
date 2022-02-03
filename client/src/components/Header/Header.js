@@ -36,19 +36,7 @@ class Header extends Component {
                     isAuthenticated: false,
                 });
             });
-
-        document.addEventListener("mousedown", this.handleClickOutside);
     }
-
-    componentWillUnmount() {
-        document.removeEventListener("mousedown", this.handleClickOutside);
-    }
-
-    handleClickOutside = (event) => {
-        this.setState({
-            showHamburgerMenu: false,
-        });
-    };
 
     signOut = () => {
         // Change location to /logout server route while passing it
@@ -57,18 +45,28 @@ class Header extends Component {
         window.location = `http://localhost:8080/users/logout?from=${url}`;
     };
 
+    /**
+     * Function to handle dropdown menu state for wide screens
+     */
     toggleMenu = () => {
         this.setState((prevState) => ({
             showDropdown: !prevState.showDropdown,
         }));
     };
 
+    /**
+     * Function to handle hamburger menu state for mobile screen
+     */
     toggleHamburger = () => {
         this.setState((prevState) => ({
             showHamburger: !prevState.showHamburger,
         }));
     };
 
+    /**
+     *
+     * @returns HTML element for hamburger menu for mobile screen
+     */
     hamburgerMenu() {
         return (
             <nav className="hamburger__navigation">
@@ -111,6 +109,10 @@ class Header extends Component {
         );
     }
 
+    /**
+     *
+     * @returns HTML element for dropdown menu for wide screens
+     */
     dropdownMenu() {
         return (
             <div className="profile">
@@ -166,6 +168,10 @@ class Header extends Component {
         );
     }
 
+    /**
+     * If user is authenticated, render the full header, else display only login cta
+     * @returns Header
+     */
     render() {
         if (this.state.isAuthenticated) {
             return (

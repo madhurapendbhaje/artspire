@@ -16,6 +16,13 @@ class TutorialsPage extends Component {
         error: false,
     };
 
+    /**
+     * Function to handle like/dislike for tutorials
+     * @param {object} event
+     * @param {string} url
+     * @param {string} title
+     * @param {string} category
+     */
     favoriteHandler = (event, url, title, category) => {
         event.preventDefault();
         const tutorialObj = {
@@ -26,11 +33,8 @@ class TutorialsPage extends Component {
         };
         axios
             .post(`${API_URL}/tutorials`, tutorialObj)
-            .then((response) => console.log(response))
-            .catch((err) => {
-                console.log("Not saved");
-                console.log(err);
-            });
+            .then((_response) => {})
+            .catch((_err) => {});
     };
 
     componentDidMount() {

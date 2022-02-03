@@ -41,13 +41,16 @@ class ProfilePage extends Component {
         this.setState({ medium: currentMedium });
     };
 
+    /**
+     * API call to get user details
+     */
     getUserDetails() {
         axios
             .get(`${API_URL}/users/${this.props.user.id}`)
             .then((res) => {
                 this.setState({ user: res.data });
             })
-            .catch((err) => console.log(err));
+            .catch((_err) => {});
     }
 
     /**
@@ -67,8 +70,9 @@ class ProfilePage extends Component {
             .then((_response) => {
                 this.getUserDetails();
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((_err) => {
+                {
+                }
             });
     };
 

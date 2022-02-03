@@ -24,7 +24,7 @@ class Tutorials extends Component {
             .then((response) => {
                 this.setState({ tutorials: response.data.items });
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {});
     }
 
     favoriteHandler = (event, url, title, contentType, category) => {
@@ -37,11 +37,8 @@ class Tutorials extends Component {
         };
         axios
             .post(`${API_URL}/tutorials`, tutorialObj)
-            .then((response) => console.log(response))
-            .catch((err) => {
-                console.log("Not saved");
-                console.log(err);
-            });
+            .then((_response) => {})
+            .catch((_err) => {});
     };
 
     render() {
@@ -72,35 +69,6 @@ class Tutorials extends Component {
                                 category={this.props.match.params.category}
                                 favoriteHandler={this.favoriteHandler}
                             />
-                            // <div
-                            //     key={id.videoId}
-                            //     className="video-grid__video-frame"
-                            // >
-                            //     <iframe
-                            //         src={videoURL}
-                            //         frameBorder="0"
-                            //         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            //         allowFullScreen
-                            //         className="video-grid__video"
-                            //     />
-                            //     <div className="video-grid__caption-container">
-                            //         <h4 className="video-grid__caption">
-                            //             {snippet.title}
-                            //         </h4>
-                            //         <img
-                            //             src={heartIcon}
-                            //             alt="heart icon"
-                            //             className="video-grid__icon"
-                            //             onClick={(event) => {
-                            //                 this.favoriteHandler(
-                            //                     event,
-                            //                     videoURL,
-                            //                     this.props.match.params.category
-                            //                 );
-                            //             }}
-                            //         />
-                            //     </div>
-                            // </div>
                         );
                     })}
                 </div>

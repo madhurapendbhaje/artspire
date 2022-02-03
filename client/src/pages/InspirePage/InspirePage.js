@@ -54,6 +54,11 @@ class InspirePage extends Component {
         }, 100);
     };
 
+    /**
+     * API call to get list of photos
+     * @param {string} category
+     * @param {integer} page
+     */
     getPhotos = (category, page) => {
         axios
             .get(
@@ -71,6 +76,11 @@ class InspirePage extends Component {
             });
     };
 
+    /**
+     * Function to handle like/dislike of images
+     * @param {object} event
+     * @param {string} url
+     */
     favoriteHandler = (event, url) => {
         event.preventDefault();
         const photoObj = {
@@ -97,14 +107,22 @@ class InspirePage extends Component {
         this.getPhotos(input, this.state.page);
     };
 
+    /**
+     * Handler for search more CTA. Increment the page count for API call.
+     * @param {object} event
+     */
     moreHandler = (event) => {
         event.preventDefault();
         // Increment the page count to search new photos
-        console.log(this.state);
         let page = this.state.page + 1;
         this.getPhotos(this.state.category, page);
     };
 
+    /**
+     * Function to generate grid of images
+     * @param {Array} photoArrList
+     * @returns
+     */
     photoGrid(photoArrList) {
         return (
             <>
@@ -161,6 +179,9 @@ class InspirePage extends Component {
         );
     }
 
+    /**
+     * If props received, get page number and category from props to handle 'back' functionality while browsing images
+     */
     componentDidMount() {
         if (this.props.location.state) {
             this.setState({ moveSearch: true });
@@ -177,9 +198,9 @@ class InspirePage extends Component {
     }
 
     render() {
-        // if (this.state.photos.length === 0) {
-        //     return <div>Finding photos...</div>;
-        // }
+        if (this.state.photos.length === 0) {
+            return <div className="search-bar">Finding photos...</div>;
+        }
         let modifiedPhotoArr = [];
         if (this.state.windowSize < 1280) {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 2);

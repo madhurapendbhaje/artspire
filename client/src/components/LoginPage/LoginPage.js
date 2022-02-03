@@ -7,7 +7,6 @@ import loginImage from "../../assets/images/login.svg";
 
 class Login extends Component {
     login = () => {
-        console.log(this.props.location);
         // Change location to /login server route while sending a redirect url
         // If user is coming from a page different than /, get the page they
         // are coming from, otherwise redirect to / after login

@@ -36,39 +36,22 @@ class UserHome extends Component {
         this.getUserData(id);
     }
 
+    /**
+     * Function to toggle content state from photos to tutorials
+     * @param {string} contentType
+     */
     toggleContent(contentType) {
         this.setState({ content: contentType });
     }
 
-    sortCategories() {
-        let categories = [];
-        let categoriesData = {};
-        let userPhotos = this.state.user.photos;
-        let userTutorials = this.state.user.tutorials;
-
-        userPhotos.forEach((photo) => {
-            if (!categories.includes(photo.category)) {
-                categories.push(photo.category);
-            }
-        });
-        userTutorials.forEach((tutorial) => {
-            if (!categories.includes(tutorial.category)) {
-                categories.push(tutorial.category);
-            }
-        });
-
-        categories.forEach((category) => {
-            categoriesData[category] = { photos: [], tutorials: [] };
-            categoriesData[category].photos = userPhotos.filter(
-                (photo) => photo.category === category
-            );
-            categoriesData[category].tutorials = userTutorials.filter(
-                (tutorial) => tutorial.category === category
-            );
-        });
-        return categoriesData;
-    }
-
+    /**
+     * Function to handle likes/dislikes
+     * @param {object} event
+     * @param {string} url
+     * @param {string} title
+     * @param {string} contentType
+     * @param {string} category
+     */
     favoriteHandler = (event, url, title, contentType, category) => {
         event.preventDefault();
         let obj = null;
@@ -92,9 +75,14 @@ class UserHome extends Component {
             .then((_response) => {
                 this.getUserData(this.state.user.id);
             })
-            .catch((err) => console.log(`Not saved ${err}`));
+            .catch((_err) => {});
     };
 
+    /**
+     * For first time user, display 'nothing'
+     * For returning users, display saved images and tutorials
+     * @returns HTML element for user home page content
+     */
     contentRender() {
         let arr = [];
         let noImg = null;
@@ -174,7 +162,7 @@ class UserHome extends Component {
 
     render() {
         if (!this.state.user) {
-            return <p>Loading..</p>;
+            return <p className="user-home">Loading..</p>;
         }
         return (
             <div className="user-home">
@@ -227,22 +215,6 @@ class UserHome extends Component {
                             />
                             <p className="user-home__menu-label">Tutorials</p>
                         </div>
-                        {/* <div
-                            className={
-                                this.state.content === "collection"
-                                    ? "user-home__menu-item user-home__menu-item--active"
-                                    : "user-home__menu-item"
-                            }
-                            onClick={() => {
-                                this.toggleContent("collection");
-                            }}
-                        >
-                            <img
-                                src={collectionIcon}
-                                className="user-home__menu-icon"
-                            />
-                            <p className="user-home__menu-label">Collection</p>
-                        </div> */}
                     </div>
                 </div>
                 <div className="user-home__content">{this.contentRender()}</div>

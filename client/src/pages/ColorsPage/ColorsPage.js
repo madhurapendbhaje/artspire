@@ -74,7 +74,6 @@ class ColorsPage extends Component {
 
     favoriteHandler = (event, url, category) => {
         event.preventDefault();
-        console.log(this.props);
         const photoObj = {
             user_id: this.props.user.id,
             url: url,
@@ -82,8 +81,8 @@ class ColorsPage extends Component {
         };
         axios
             .post(`${API_URL}/photos`, photoObj)
-            .then((response) => console.log(response))
-            .catch((_err) => console.log("Not saved"));
+            .then((_response) => {})
+            .catch((_err) => {});
     };
 
     componentDidMount() {
@@ -100,7 +99,6 @@ class ColorsPage extends Component {
         const keywords = this.props.location.state.keywords;
         const page = this.props.location.state.page;
 
-        console.log(page);
         return (
             <div className="color">
                 <div className="color__cta">
