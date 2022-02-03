@@ -198,9 +198,6 @@ class InspirePage extends Component {
     }
 
     render() {
-        if (this.state.photos.length === 0) {
-            return <div className="search-bar">Finding photos...</div>;
-        }
         let modifiedPhotoArr = [];
         if (this.state.windowSize < 1280) {
             modifiedPhotoArr = this.splitToChunks(this.state?.photos, 2);
