@@ -11,9 +11,9 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
   - [Tech Stack](#tech-stack)
   - [Environment Variables](#environment-variables)
       - [In client folder, create a .env file and add the following variables](#in-client-folder-create-a-env-file-and-add-the-following-variables)
-      - [Generate API keys to access Unsplash and Youtube APIs:](#generate-api-keys-to-access-unsplash-and-youtube-apis)
+      - [Generate API keys to access Unsplash and Youtube APIs](#generate-api-keys-to-access-unsplash-and-youtube-apis)
       - [In server folder, create a .env file and add the following variables](#in-server-folder-create-a-env-file-and-add-the-following-variables)
-      - [Genreate OAuth Client ID and secret:](#genreate-oauth-client-id-and-secret)
+      - [Generate OAuth Client ID and secret](#generate-oauth-client-id-and-secret)
   - [Development](#development)
   - [Acknowledgements](#acknowledgements)
 
@@ -22,7 +22,7 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
 -   Front End: React, Sass, HTML
 -   Back End: Node JS, Express
 -   Database: MySQL
--   Authentication: OAuth
+-   Authentication: OAuth with Google
 -   External APIs: Unsplash, Youtube
 
 ## Environment Variables
@@ -39,7 +39,7 @@ To run this project, you will need to add environment variables to your .env fil
 `REACT_APP_YOUTUBE_API_URL=https://www.googleapis.com/youtube/v3/search`
 `REACT_APP_YOUTUBE_API_KEY=XXXX`
 
-#### Generate API keys to access Unsplash and Youtube APIs:
+#### Generate API keys to access Unsplash and Youtube APIs
 
 [Unsplash](https://unsplash.com/developers) - Register as a developer and generate an API key
 
@@ -57,7 +57,7 @@ To run this project, you will need to add environment variables to your .env fil
 
 `GOOGLE_CALLBACK_URL=http://localhost:8080/users/auth`
 
-#### Genreate OAuth Client ID and secret:
+#### Generate OAuth Client ID and secret
 
 [Google](https://developers.google.com/identity/protocols/oauth2) Create a client ID and add these as settings:
 ![Screenshot](project_images/oauth.png)
