@@ -6,8 +6,19 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
 
 ##### Table of Contents
 
+[Tech Stack](#tech)
 [Environment Variables](#env)
 [Development](#development)
+[Acknowledgment](#ack)
+
+<a name="tech">
+## Tech Stack
+
+-   Front End: React, Sass, HTML
+-   Back End: Node JS, Express
+-   Database: MySQL
+-   Authentication: OAuth
+-   External APIs: Unsplash, Youtube
 
 <a name="env">
 ## Environment Variables
@@ -53,16 +64,13 @@ Generate a secure token text and add it to the `SESSION_SECRET` variable in .env
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
 ```
 
-<a name="#development">
-### Development
+<a name="development">
+## Development
 
 In client folder, run the following commands:
 
 ```bash
 npm install
-```
-
-```bash
 npm start
 ```
 
@@ -70,12 +78,13 @@ In server folder, run the following commands:
 
 ```bash
 npm install
-```
-
-```bash
 npm migrate
-```
-
-```bash
 npm start
 ```
+
+<a name="ack">
+## Acknowledgements
+
+-   [Project artwork](https://undraw.co/)
+-   [Unsplash API](https://unsplash.com/developers)
+-   [Google API](https://developers.google.com/youtube/v3)
