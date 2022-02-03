@@ -6,12 +6,18 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
 
 ## Table of Contents
 
--   [Tech Stack](#tech)
--   [Environment Variables](#env)
--   [Development](#development)
--   [Acknowledgment](#ack)
+- [Artspire](#artspire)
+  - [Table of Contents](#table-of-contents)
+  - [Tech Stack](#tech-stack)
+  - [Environment Variables](#environment-variables)
+      - [In client folder, create a .env file and add the following variables](#in-client-folder-create-a-env-file-and-add-the-following-variables)
+      - [Generate API keys to access Unsplash and Youtube APIs:](#generate-api-keys-to-access-unsplash-and-youtube-apis)
+      - [In server folder, create a .env file and add the following variables](#in-server-folder-create-a-env-file-and-add-the-following-variables)
+      - [Genreate OAuth Client ID and secret:](#genreate-oauth-client-id-and-secret)
+  - [Development](#development)
+  - [Acknowledgements](#acknowledgements)
 
-<a name="tech">
+<a name="tech-stack"/>
 ## Tech Stack
 
 -   Front End: React, Sass, HTML
@@ -20,7 +26,7 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
 -   Authentication: OAuth
 -   External APIs: Unsplash, Youtube
 
-<a name="env">
+<a name="environment-variables"/>
 ## Environment Variables
 
 To run this project, you will need to add environment variables to your .env files for client and server both.
@@ -64,7 +70,7 @@ Generate a secure token text and add it to the `SESSION_SECRET` variable in .env
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
 ```
 
-<a name="development">
+<a name="development"/>
 ## Development
 
 In client folder, run the following commands:
