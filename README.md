@@ -17,7 +17,6 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
   - [Development](#development)
   - [Acknowledgements](#acknowledgements)
 
-<a name="tech-stack"/>
 ## Tech Stack
 
 -   Front End: React, Sass, HTML
@@ -26,7 +25,6 @@ With Artspire, the user will be able to explore an expansive gallery of photos f
 -   Authentication: OAuth
 -   External APIs: Unsplash, Youtube
 
-<a name="environment-variables"/>
 ## Environment Variables
 
 To run this project, you will need to add environment variables to your .env files for client and server both.
@@ -70,7 +68,6 @@ Generate a secure token text and add it to the `SESSION_SECRET` variable in .env
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
 ```
 
-<a name="development"/>
 ## Development
 
 In client folder, run the following commands:
@@ -88,7 +85,6 @@ npm migrate
 npm start
 ```
 
-<a name="ack">
 ## Acknowledgements
 
 -   [Project artwork](https://undraw.co/)
