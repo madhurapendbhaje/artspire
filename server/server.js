@@ -73,8 +73,7 @@ passport.use(
         profile,
         done
     ) {
-        // console.log(profile);
-        // // Create new user
+        // Create new user
         const newUser = {
             id: uuidv4(),
             first_name: profile.given_name,

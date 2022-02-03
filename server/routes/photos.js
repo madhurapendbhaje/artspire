@@ -3,6 +3,11 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const knex = require("../knexConfig");
 
+/**
+ * If photos already marked as 'liked', and same photo encountered again,
+ * mark it as 'disliked' and remove from user-photo relation table
+ * If not, add it to user-photo relation table
+ */
 router.post("/", (req, res) => {
     knex("photos")
         .where({ url: req.body.url })

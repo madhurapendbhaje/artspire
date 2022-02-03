@@ -3,6 +3,11 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const knex = require("../knexConfig");
 
+/**
+ * If tutorial already marked as 'liked', and same tutorial encountered again,
+ * mark it as 'disliked' and remove from user-tutorial relation table
+ * If not, add it to user-tutorial relation table
+ */
 router.post("/", (req, res) => {
     knex("tutorials")
         .where({ url: req.body.url })
