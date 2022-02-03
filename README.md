@@ -4,6 +4,12 @@ A web application that aims to help and inspire artists and amateur hobbyists, w
 
 With Artspire, the user will be able to explore an expansive gallery of photos for inspiration, and find matching color palettes and helpful video tutorials on some useful techniques.
 
+##### Table of Contents
+
+[Environment Variables](#env)
+[Development](#development)
+
+<a name="env">
 ## Environment Variables
 
 To run this project, you will need to add environment variables to your .env files for client and server both.
@@ -39,10 +45,37 @@ To run this project, you will need to add environment variables to your .env fil
 #### Genreate OAuth Client ID and secret:
 
 [Google](https://developers.google.com/identity/protocols/oauth2) Create a client ID and add these as settings:
-![Screenshot](oauth.png)
+![Screenshot](project_images/oauth.png)
 
 Generate a secure token text and add it to the `SESSION_SECRET` variable in .env
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
+```
+
+<a name="#development">
+### Development
+
+In client folder, run the following commands:
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+In server folder, run the following commands:
+
+```bash
+npm install
+```
+
+```bash
+npm migrate
+```
+
+```bash
+npm start
 ```
