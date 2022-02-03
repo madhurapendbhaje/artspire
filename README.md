@@ -4,12 +4,12 @@ A web application that aims to help and inspire artists and amateur hobbyists, w
 
 With Artspire, the user will be able to explore an expansive gallery of photos for inspiration, and find matching color palettes and helpful video tutorials on some useful techniques.
 
-##### Table of Contents
+## Table of Contents
 
-[Tech Stack](#tech)
-[Environment Variables](#env)
-[Development](#development)
-[Acknowledgment](#ack)
+-   [Tech Stack](#tech)
+-   [Environment Variables](#env)
+-   [Development](#development)
+-   [Acknowledgment](#ack)
 
 <a name="tech">
 ## Tech Stack
